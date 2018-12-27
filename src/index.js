@@ -1,6 +1,6 @@
 import {
   $, hasClass, addClass, removeClass, attr,
-  on, off, find
+  on, off, find, append, css, prop, setNode
 } from './dom.js'
 
 import { 
@@ -25,7 +25,7 @@ import {
 export {
   // dom
   $, hasClass, addClass, removeClass, attr,
-  on, off, find,
+  on, off, find, append, css, prop, setNode,
 
   // 工具
   wt, getType, each,

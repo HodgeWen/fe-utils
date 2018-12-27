@@ -93,6 +93,20 @@ function attr(param) {
   return this
 }
 
+function prop(...params) {
+  const len = params.length 
+  if (len === 1) {
+    return this[0][params[0]]
+  }
+  if (len === 2) {
+    wt(this).each(node => {
+      node[params[0]] = params[1]
+    })
+    return this
+  }
+  return this
+}
+
 function append(child, deep = true) {
   wt(this).each(node => {
     node.appendChild(child.cloneNode(deep))
@@ -128,6 +142,8 @@ function off(type, handler) {
   return this
 }
 
+
+
 function setNode() {
 
 }
@@ -140,5 +156,5 @@ function find(qs, dataType) {
 
 export {
   $, hasClass, addClass, removeClass, attr,
-  on, off, find, append, css
+  on, off, find, append, css, prop, setNode
 }

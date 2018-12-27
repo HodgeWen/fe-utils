@@ -4,22 +4,24 @@ import { serialize } from './utils/object'
 import { json } from './utils/string.js'
 
 
-function Data(any) {
+function DataWrap(any) {
   this.data = any
   this.type = this.getType()
 }
 
-const pt = Data.prototype = Object.create(null)
-pt.constructor = Data
+const pt = DataWrap.prototype = Object.create(null)
+pt.constructor = DataWrap
 
 function wt(any) {
-  return new Data(any)
+  return new DataWrap(any)
 }
+
 wt.use = function (...funcs) {
   for (let i = 0, len = funcs.length; i < len; i++) {
     pt[funcs[i].name] = funcs[i]
   }
 }
+
 wt.use(getType, each)
 
 function getType(data) {
