@@ -1,5 +1,6 @@
 import {
-  $, hasClass 
+  $, hasClass, addClass, removeClass, attr,
+  on, off, find
 } from './dom.js'
 
 import { 
@@ -23,7 +24,8 @@ import {
 
 export {
   // dom
-  $, hasClass,
+  $, hasClass, addClass, removeClass, attr,
+  on, off, find,
 
   // 工具
   wt, getType, each,

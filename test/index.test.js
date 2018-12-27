@@ -1,5 +1,5 @@
 import { wt, each, getType } from '../src/index'
-import { $ } from '../src/index'
+import { $, hasClass } from '../src/index'
 
 describe('测试wt的原始功能', () => {
   
@@ -19,7 +19,7 @@ describe('测试wt的原始功能', () => {
 
 describe('测试$的原始功能', () => {
   test('获取节点', () => {
-
+    expect($().hasClass()).toBe('Array')
   })
 })
 

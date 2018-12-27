@@ -9,19 +9,18 @@ function Data(any) {
   this.type = this.getType()
 }
 
+const pt = Data.prototype = Object.create(null)
+pt.constructor = Data
+
 function wt(any) {
   return new Data(any)
 }
-
-const pt = Data.prototype = Object.create(null)
-pt.constructor = Data
-pt.getType = getType
-pt.each = each
-pt.use = function (...funcs) {
+wt.use = function (...funcs) {
   for (let i = 0, len = funcs.length; i < len; i++) {
     pt[funcs[i].name] = funcs[i]
   }
 }
+wt.use(getType, each)
 
 function getType(data) {
   const ctx = data ? data : this.data
@@ -32,25 +31,27 @@ function each(handle) {
   const data = this.data || this
   const type = this.getType ? this.getType(data) : getType(data)
 
-  if (type === 'Array') {
-    for (let i = 0, len = data.length; i < len; i++) {
-      if (handle(data[i], i, data) === false) return false
-    }
-    return true
-  }
-  if (type === 'Object') {
+  // 普通对象
+  if (type === 'Object' && data.length === undefined) {
     for (let key in data) {
-      if (handle(data[key], key, data) === false) return false
+      if (data.hasOwnProperty(key)) {
+        if (handle(data[key], key, data) === false) return false
+      }
     }
     return true
   }
+  // 数字
   if (type === 'Number') {
     for (let i = 1; i <= data; i++) {
       if (handle(i, data) === false) return false
     }
     return true
   }
-  return null
+  // 数组或者伪数组
+  for (let i = 0, len = data.length; i < len; i++) {
+    if (handle(data[i], i, data) === false) return false
+  }
+  return true
 }
 
 export {

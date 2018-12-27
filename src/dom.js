@@ -3,7 +3,7 @@ function Selector(str) {
   this.length = 0
   this.selector = str
   const nodeList = document.querySelectorAll(str)
-  wt(nodeList).each(node => this.push(node))
+  this.push(...nodeList)
 }
 
 const pt = Selector.prototype = Object.create(null)
@@ -14,44 +14,104 @@ pt.push = ap.push
 pt.slice = ap.slice
 pt.splice = ap.splice
 
-pt.use = function (...funcs) {
-  wt(funcs).each(fn => pt[fn.name] = fn)
-}
-
 function $(str) {
   return new Selector(str)
 }
 
-function hasClass(className) {
-  console.log(wt(this).type)
+$.use = function (...funcs) {
+  wt(funcs).each(fn => pt[fn.name] = fn)
+}
+
+function hasClass(...classNames) {
+  return wt(classNames).each(
+    className => this[0].className.split(' ').indexOf(className) !== -1
+  )
 }
 
 function addClass(className) {
-
+  if (this.hasClass(className)) {
+    return this
+  }
+  wt(this).each(node => {
+    node.classList ? 
+    node.classList.add(className) :
+    node.className += ` ${className}`
+  })  
+  return this
 }
 
 function removeClass(className) {
-
+  if (this.hasClass(className)) {
+    return this
+  }
+  wt(this).each(node => {
+    node.classList ? 
+    node.classList.remove(className) :
+    node.className.replace(new RegExp('\\s?' + className), '')
+  })  
+  return this
 }
 
 function css() {
 
 }
 
-function attr() {
+function attr(param) {
+  const type = wt(param).type
+  
+  if (type === 'Object') {
+    wt(this).each(node => {
+      wt(param).each((item, key) => {
+        node.setAttribute(key, item)
+      })
+    })
+    return this
+  }
 
+  if (type === 'String') {
+    return this[0].getAttribute(param)
+  }
+
+  if (type === 'Array') {
+    const arr = []
+    wt(param).each(v => {
+      arr.push(this[0].getAttribute(v))
+    })
+    return arr
+  }
+  return this
 }
 
 function append(dom) {
 
 }
 
-function on(type, handler) {
-
+function on(type, handler, propagation = true) {
+  const t = wt(handler).type
+  if (t === 'Object') {
+    wt(this).each(node => {
+      node.addEventListener(type, e => {
+        const className = e.target.className
+        const targetClass = className && className.split(' ')[0]
+        handler[targetClass] && handler[targetClass](node, e)
+      }, propagation)
+    })
+    return this
+  }
+  if (t === 'Function') {
+    wt(this).each(node => {
+      node.addEventListener(type, handler, propagation)
+    })
+    return this
+  }
+  return this
 }
 
 function off(type, handler) {
-
+  wt(this).each(node => {
+    node.removeEvent(type, handler)
+  })
+  return this
 }
 
 function setNode() {
@@ -59,9 +119,12 @@ function setNode() {
 }
 
 function find(qs, dataType) {
-
+  const nl = $()
+  nl.push(this[0].querySelectorAll(qs)) 
+  return nl
 }
 
 export {
-  $, hasClass
+  $, hasClass, addClass, removeClass, attr,
+  on, off, find
 }
