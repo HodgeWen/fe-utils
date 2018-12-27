@@ -52,8 +52,19 @@ function removeClass(className) {
   return this
 }
 
-function css() {
-
+function css(param) {
+  const type = wt(param).type
+  if (type === 'Object') {
+    wt(this).each(node => {
+      wt(param).each((item, key) => {
+        node.style[key] = item
+      })
+    })
+    return this
+  }
+  if (type === 'String') {
+    return window.getComputedStyle(this[0])[param]
+  }
 }
 
 function attr(param) {
