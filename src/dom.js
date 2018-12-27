@@ -93,8 +93,11 @@ function attr(param) {
   return this
 }
 
-function append(dom) {
-
+function append(child, deep = true) {
+  wt(this).each(node => {
+    node.appendChild(child.cloneNode(deep))
+  })
+  return this
 }
 
 function on(type, handler, propagation = true) {
@@ -137,5 +140,5 @@ function find(qs, dataType) {
 
 export {
   $, hasClass, addClass, removeClass, attr,
-  on, off, find
+  on, off, find, append, css
 }
