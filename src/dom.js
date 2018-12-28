@@ -1,10 +1,13 @@
 import { wt } from './utils'
 function Selector(str) {
   this.length = 0
-  this.selector = str
-  const nodeList = document.querySelectorAll(str)
+  if (str) {
+    this.selector = str 
+  }
+  let nodeList = document.querySelectorAll(str)
   this.push(...nodeList)
 }
+
 
 const pt = Selector.prototype = Object.create(null)
 const ap = Array.prototype
@@ -142,16 +145,12 @@ function off(type, handler) {
   return this
 }
 
-
-
 function setNode() {
 
 }
 
 function find(qs, dataType) {
-  const nl = $()
-  nl.push(this[0].querySelectorAll(qs)) 
-  return nl
+  return $(this.selector + ' ' + qs)
 }
 
 export {
