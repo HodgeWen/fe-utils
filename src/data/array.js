@@ -6,6 +6,12 @@ function minus() {
 
 }
 
+function set() {
+
+}
+
 export {
-  add, minus
+  add,
+  minus,
+  set
 }

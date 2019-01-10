@@ -1,13 +1,13 @@
 class Cookie {
   constructor() {
-    
-  }
-
-  get (key) {
 
   }
 
-  set (conf) {
+  get(key) {
+
+  }
+
+  set(conf) {
 
   }
 }

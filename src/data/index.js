@@ -1,17 +1,15 @@
 import {
   add,
   minus
-} from './data-convert/array.js'
-
-import cookie from './data-convert/cookie.js'
+} from './array'
 
 import {
   serialize
-} from './data-convert/object'
+} from './object'
 
 import {
   json
-} from './data-convert/string.js'
+} from './string'
 
 import {
   isArr,
@@ -19,7 +17,7 @@ import {
   isFunc,
   isStr,
   isNum
-} from './data-convert/types'
+} from './types'
 
 function DataWrap(any) {
   this.data = any
@@ -73,7 +71,6 @@ export {
   wt,
   add,
   minus,
-  cookie,
   serialize,
   json,
   isArr,

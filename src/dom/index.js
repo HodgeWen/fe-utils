@@ -1,7 +1,7 @@
 import {
   each,
   getType
-} from './dom-utils'
+} from './proto'
 
 function Selector(str) {
   this.length = 0

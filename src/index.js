@@ -12,7 +12,7 @@ import {
   prop,
   setNode,
   eq
-} from './dom.js'
+} from './dom'
 
 import {
   wt,
@@ -20,7 +20,6 @@ import {
   each,
   add,
   minus,
-  cookie,
   serialize,
   json,
   isArr,
@@ -28,8 +27,12 @@ import {
   isFunc,
   isStr,
   isNum
-} from './data-convert.js'
+} from './data'
 
+
+import {
+  cookie
+} from './utils'
 
 
 
