@@ -29,6 +29,12 @@ import {
   isNum
 } from '../src/index'
 
+import {
+  cookie,
+  url
+}
+from '../src/index'
+
 $.use(
   hasClass,
   addClass,
@@ -56,3 +62,5 @@ wt.use(
 )
 window.wt = wt
 window.$ = $
+window.url = url
+window.cookie = cookie

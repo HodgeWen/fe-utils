@@ -31,7 +31,8 @@ import {
 
 
 import {
-  cookie
+  cookie,
+  url
 } from './utils'
 
 
@@ -60,18 +61,21 @@ export {
   setNode,
   eq,
 
-  // 工具
+  // 数据
   wt,
   getType,
   each,
   add,
   minus,
-  cookie,
   serialize,
   json,
   isArr,
   isObj,
   isFunc,
   isStr,
-  isNum
+  isNum,
+
+  // 工具
+  cookie,
+  url
 }
