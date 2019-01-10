@@ -61,7 +61,12 @@ function wt(any) {
 }
 
 wt.use = function (...funcs) {
-  wt(funcs).each(fn => pt[fn.name] = fn)
+  wt(funcs).each(fn => {
+    const key = fn.name
+    if (!pt[key]) {
+      pt[key] = fn
+    }
+  })
 }
 
 export {
