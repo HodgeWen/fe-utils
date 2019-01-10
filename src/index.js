@@ -10,7 +10,8 @@ import {
   append,
   css,
   prop,
-  setNode
+  setNode,
+  eq
 } from './dom.js'
 
 import {
@@ -54,6 +55,7 @@ export {
   css,
   prop,
   setNode,
+  eq,
 
   // 工具
   wt,

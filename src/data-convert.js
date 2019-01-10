@@ -2,10 +2,13 @@ import {
   add,
   minus
 } from './data-convert/array.js'
+
 import cookie from './data-convert/cookie.js'
+
 import {
   serialize
 } from './data-convert/object'
+
 import {
   json
 } from './data-convert/string.js'
@@ -57,8 +60,6 @@ pt.each = function (handle) {
   }
   return true
 }
-
-
 
 function wt(any) {
   return new DataWrap(any)

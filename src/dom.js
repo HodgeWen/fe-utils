@@ -142,11 +142,14 @@ function setNode() {
 }
 
 function find(qs) {
-  return $(this.selector + ' ' + qs)
+  return this[0].querySelectorAll(qs)
 }
 
 function eq(index) {
-  return this.splice(index, 1)
+  const target = this[index]
+  this.splice(0)
+  this.push(target)
+  return this
 }
 
 export {

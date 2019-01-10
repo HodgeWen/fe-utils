@@ -1,12 +1,21 @@
-// import { 
-//   $, hasClass, addClass, removeClass, attr,
-//   on, off, find, append, css, prop, setNode
-// } from '../src/index'
+import {
+  $,
+  hasClass,
+  addClass,
+  removeClass,
+  attr,
+  on,
+  off,
+  find,
+  append,
+  css,
+  prop,
+  setNode,
+  eq
+} from '../src/index'
 
-// $.use(
-//   hasClass, addClass, removeClass, attr,
-//   on, off, find, append, css, prop, setNode
-// )
+
+
 import {
   wt,
   add,
@@ -19,6 +28,21 @@ import {
   isStr,
   isNum
 } from '../src/index'
+
+$.use(
+  hasClass,
+  addClass,
+  removeClass,
+  attr,
+  on,
+  off,
+  find,
+  append,
+  css,
+  prop,
+  setNode,
+  eq
+)
 wt.use(
   add,
   minus,
@@ -31,3 +55,4 @@ wt.use(
   isNum
 )
 window.wt = wt
+window.$ = $
