@@ -12,6 +12,7 @@ import {
 } from './string'
 
 import {
+  getType,
   isArr,
   isObj,
   isFunc,
@@ -21,20 +22,16 @@ import {
 
 function DataWrap(any) {
   this.data = any
-  this.type = this.getType()
+  this.type = getType(any)
 }
 
 const pt = DataWrap.prototype = Object.create(null)
 
 pt.constructor = DataWrap
 
-pt.getType = function () {
-  return Object.prototype.toString.call(this.data).slice(8, -1)
-}
-
 pt.each = function (handle) {
-  const data = this.data
-  const type = this.getType()
+  const data = this.data ? this.data : this
+  const type = getType(data).slice(data)
 
   // 普通对象
   if (type === 'Object' && data.length === undefined) {

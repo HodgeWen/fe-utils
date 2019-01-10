@@ -1,7 +1,9 @@
 import {
-  wt
+  wt,
+  json,
+  serialize
 } from '../data'
-
+wt.use(json, serialize)
 class Url {
   getPath(index) {
     return index !== undefined ?
@@ -9,12 +11,14 @@ class Url {
       window.location.pathname
   }
 
-  getSearch() {
-
+  getSearch(key) {
+    const searchStr = window.location.search
+    const ret = wt(searchStr).json()
+    return key !== undefined ? ret[key] : ret
   }
 
-  search() {
-
+  search(obj) {
+    window.location.search = '?' + wt(obj).serialize()
   }
 }
 

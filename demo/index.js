@@ -50,15 +50,15 @@ $.use(
   eq
 )
 wt.use(
-  add,
-  minus,
-  serialize,
+  // add,
+  // minus,
+  // serialize,
   json,
-  isArr,
-  isObj,
-  isFunc,
-  isStr,
-  isNum
+  // isArr,
+  // isObj,
+  // isFunc,
+  // isStr,
+  // isNum
 )
 window.wt = wt
 window.$ = $

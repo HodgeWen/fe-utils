@@ -1,3 +1,7 @@
+function getType(data) {
+  return Object.prototype.toString.call(data).slice(8, -1)
+}
+
 function isArr() {
   return this.type === 'Array'
 }
@@ -23,6 +27,7 @@ function isBoo() {
 }
 
 export {
+  getType,
   isArr,
   isObj,
   isFunc,
