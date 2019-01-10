@@ -1,15 +1,33 @@
 import {
-  $, hasClass, addClass, removeClass, attr,
-  on, off, find, append, css, prop, setNode
+  $,
+  hasClass,
+  addClass,
+  removeClass,
+  attr,
+  on,
+  off,
+  find,
+  append,
+  css,
+  prop,
+  setNode
 } from './dom.js'
 
-import { 
-  wt, getType, each,
-  add, minus,
+import {
+  wt,
+  getType,
+  each,
+  add,
+  minus,
   cookie,
   serialize,
-  json 
-} from './utils.js'
+  json,
+  isArr,
+  isObj,
+  isFunc,
+  isStr,
+  isNum
+} from './data-convert.js'
 
 
 
@@ -24,13 +42,31 @@ import {
 
 export {
   // dom
-  $, hasClass, addClass, removeClass, attr,
-  on, off, find, append, css, prop, setNode,
+  $,
+  hasClass,
+  addClass,
+  removeClass,
+  attr,
+  on,
+  off,
+  find,
+  append,
+  css,
+  prop,
+  setNode,
 
   // 工具
-  wt, getType, each,
-  add, minus,
+  wt,
+  getType,
+  each,
+  add,
+  minus,
   cookie,
   serialize,
-  json
+  json,
+  isArr,
+  isObj,
+  isFunc,
+  isStr,
+  isNum
 }

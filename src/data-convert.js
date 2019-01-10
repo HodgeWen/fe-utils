@@ -1,8 +1,22 @@
-import { add, minus } from './utils/array.js'
-import cookie from './utils/cookie.js'
-import { serialize } from './utils/object'
-import { json } from './utils/string.js'
+import {
+  add,
+  minus
+} from './data-convert/array.js'
+import cookie from './data-convert/cookie.js'
+import {
+  serialize
+} from './data-convert/object'
+import {
+  json
+} from './data-convert/string.js'
 
+import {
+  isArr,
+  isObj,
+  isFunc,
+  isStr,
+  isNum
+} from './data-convert/types'
 
 function DataWrap(any) {
   this.data = any
@@ -10,28 +24,16 @@ function DataWrap(any) {
 }
 
 const pt = DataWrap.prototype = Object.create(null)
+
 pt.constructor = DataWrap
 
-function wt(any) {
-  return new DataWrap(any)
+pt.getType = function () {
+  return Object.prototype.toString.call(this.data).slice(8, -1)
 }
 
-wt.use = function (...funcs) {
-  for (let i = 0, len = funcs.length; i < len; i++) {
-    pt[funcs[i].name] = funcs[i]
-  }
-}
-
-wt.use(getType, each)
-
-function getType(data) {
-  const ctx = data ? data : this.data
-  return Object.prototype.toString.call(ctx).slice(8, -1) 
-}
-
-function each(handle) {
-  const data = this.data || this
-  const type = this.getType ? this.getType(data) : getType(data)
+pt.each = function (handle) {
+  const data = this.data
+  const type = this.getType()
 
   // 普通对象
   if (type === 'Object' && data.length === undefined) {
@@ -56,10 +58,26 @@ function each(handle) {
   return true
 }
 
+
+
+function wt(any) {
+  return new DataWrap(any)
+}
+
+wt.use = function (...funcs) {
+  wt(funcs).each(fn => pt[fn.name] = fn)
+}
+
 export {
-  wt, getType, each,
-  add, minus,
+  wt,
+  add,
+  minus,
   cookie,
   serialize,
-  json
+  json,
+  isArr,
+  isObj,
+  isFunc,
+  isStr,
+  isNum
 }
