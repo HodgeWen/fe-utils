@@ -29,21 +29,10 @@ import {
   isNum
 } from './data'
 
-
 import {
   cookie,
   url
 } from './utils'
-
-
-
-
-
-
-
-
-
-
 
 export {
   // dom
@@ -60,7 +49,6 @@ export {
   prop,
   setNode,
   eq,
-
   // 数据
   wt,
   getType,
@@ -74,7 +62,6 @@ export {
   isFunc,
   isStr,
   isNum,
-
   // 工具
   cookie,
   url
