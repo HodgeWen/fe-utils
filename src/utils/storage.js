@@ -1,6 +1,6 @@
-import { eachObj } from "../common"
+import { eachObj, getType } from "../common"
 
-export default class {
+export default class WStore {
   constructor(type) {
     const table = {
       session: window.sessionStorage,
@@ -10,12 +10,18 @@ export default class {
   }
 
   get(key) {
-    return this.storage.getItem(key)
+    const value = this.storage.getItem(key)
+    const reg = /^[\[\{].*[\}\]]$/
+    return reg.test(value) ? JSON.parse(value) : value
   }
 
   set(obj) {
+    let type = ""
+    let ret = ""
     eachObj(obj, (val, key) => {
-      this.storage.setItem(key, val)
+      type = getType(val)
+      ret = type !== "Object" && type !== "Array" ? val : JSON.stringify(val)
+      this.storage.setItem(key, ret)
     })
   }
 }

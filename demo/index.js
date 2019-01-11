@@ -1,9 +1,9 @@
-// import { $, wt, utils } from "../src/index"
+import { $, wt, utils } from "../src/index"
 
-import wt, {serialize, json} from '../src/data'
-wt.use(serialize, json)
+// import wt, {serialize, json} from '../src/data'
+// wt.use(serialize, json)
 window.wt = wt
 
-// window.$ = $
+window.$ = $
 
-// window.utils = utils
+window.utils = utils

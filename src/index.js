@@ -25,12 +25,13 @@ import wt, {
   isNum
 } from "./data"
 
-import { cookie, url, dateFormat } from "./utils"
+import { cookie, url, dateFormat, WStore } from "./utils"
 
 const utils = {
   cookie,
   url,
-  dateFormat
+  dateFormat,
+  WStore
 }
 
 $.use(
