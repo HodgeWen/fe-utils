@@ -1,40 +1,26 @@
-import {
-  add,
-  minus
-} from './array'
+import { add, minus } from "./array"
 
-import {
-  serialize
-} from './object'
+import { serialize } from "./object"
 
-import {
-  json
-} from './string'
+import { json } from "./string"
 
-import {
-  getType,
-  isArr,
-  isObj,
-  isFunc,
-  isStr,
-  isNum
-} from './types'
+import { getType, isArr, isObj, isFunc, isStr, isNum } from "./types"
 
 function DataWrap(any) {
   this.data = any
   this.type = getType(any)
 }
 
-const pt = DataWrap.prototype = Object.create(null)
+const pt = (DataWrap.prototype = Object.create(null))
 
 pt.constructor = DataWrap
 
-pt.each = function (handle) {
+pt.each = function(handle) {
   const data = this.data ? this.data : this
   const type = getType(data).slice(data)
 
   // 普通对象
-  if (type === 'Object' && data.length === undefined) {
+  if (type === "Object" && data.length === undefined) {
     for (let key in data) {
       if (data.hasOwnProperty(key)) {
         if (handle(data[key], key, data) === false) return false
@@ -43,7 +29,7 @@ pt.each = function (handle) {
     return true
   }
   // 数字
-  if (type === 'Number') {
+  if (type === "Number") {
     for (let i = 1; i <= data; i++) {
       if (handle(i, data) === false) return false
     }
@@ -60,7 +46,7 @@ function wt(any) {
   return new DataWrap(any)
 }
 
-wt.use = function (...funcs) {
+wt.use = function(...funcs) {
   wt(funcs).each(fn => {
     const key = fn.name
     if (!pt[key]) {
@@ -69,15 +55,4 @@ wt.use = function (...funcs) {
   })
 }
 
-export {
-  wt,
-  add,
-  minus,
-  serialize,
-  json,
-  isArr,
-  isObj,
-  isFunc,
-  isStr,
-  isNum
-}
+export { wt, add, minus, serialize, json, isArr, isObj, isFunc, isStr, isNum }

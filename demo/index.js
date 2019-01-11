@@ -12,9 +12,7 @@ import {
   prop,
   setNode,
   eq
-} from '../src/index'
-
-
+} from "../src/index"
 
 import {
   wt,
@@ -27,13 +25,9 @@ import {
   isFunc,
   isStr,
   isNum
-} from '../src/index'
+} from "../src/index"
 
-import {
-  cookie,
-  url
-}
-from '../src/index'
+import { cookie, url } from "../src/index"
 
 $.use(
   hasClass,
@@ -52,8 +46,8 @@ $.use(
 wt.use(
   // add,
   // minus,
-  // serialize,
-  json,
+  // serialize
+  // json,
   // isArr,
   // isObj,
   // isFunc,
