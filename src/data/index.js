@@ -4,7 +4,9 @@ import { serialize } from "./object"
 
 import { json } from "./string"
 
-import { getType, isArr, isObj, isFunc, isStr, isNum } from "./types"
+import { getType } from '../common'
+
+import { isArr, isObj, isFunc, isStr, isNum } from "./types"
 
 function DataWrap(any) {
   this.data = any

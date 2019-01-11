@@ -17,13 +17,13 @@ function dataReset() {
   const ret = {}
   const ctx = this.data !== undefined ? this.data : this
   const table = {
-    'Array' : [],
-    'Object': {},
-    'Number': 0,
-    'String': ''
+    Array: [],
+    Object: {},
+    Number: 0,
+    String: ""
   }
   eachObj(ctx, (v, key) => {
-    ret[key] = table[getType(v)]    
+    ret[key] = table[getType(v)]
   })
   return ret
 }

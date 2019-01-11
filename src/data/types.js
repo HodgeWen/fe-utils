@@ -1,37 +1,25 @@
-function getType(data) {
-  return Object.prototype.toString.call(data).slice(8, -1)
-}
-
 function isArr() {
-  return this.type === 'Array'
+  return this.type === "Array"
 }
 
 function isObj() {
-  return this.type === 'Object'
+  return this.type === "Object"
 }
 
 function isFunc() {
-  return this.type === 'Function'
+  return this.type === "Function"
 }
 
 function isStr() {
-  return this.type === 'String'
+  return this.type === "String"
 }
 
 function isNum() {
-  return this.type === 'Number'
+  return this.type === "Number"
 }
 
 function isBoo() {
-  return this.type === 'Boolean'
+  return this.type === "Boolean"
 }
 
-export {
-  getType,
-  isArr,
-  isObj,
-  isFunc,
-  isStr,
-  isNum,
-  isBoo
-}
+export { isArr, isObj, isFunc, isStr, isNum, isBoo }

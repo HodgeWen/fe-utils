@@ -1,17 +1,7 @@
-function add() {
+function add() {}
 
-}
+function minus() {}
 
-function minus() {
+function set() {}
 
-}
-
-function set() {
-
-}
-
-export {
-  add,
-  minus,
-  set
-}
+export { add, minus, set }
