@@ -24,4 +24,8 @@ export default class WStore {
       this.storage.setItem(key, ret)
     })
   }
+
+  clear() {
+    this.storage.clear()
+  }
 }
