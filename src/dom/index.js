@@ -1,5 +1,3 @@
-import { each } from "../common"
-
 import { find, eq } from "./selector"
 
 import { hasClass, addClass, removeClass } from "./class"
@@ -29,7 +27,11 @@ pt.constructor = Selector
 pt.push = ap.push
 pt.slice = ap.slice
 pt.splice = ap.splice
-pt.each = each
+pt.each = function (callback) {
+  for (let i = 0, len = this.length; i < len; i++) {
+    callback(this[i], i)
+  }
+}
 
 function $(str) {
   return new Selector(str)
