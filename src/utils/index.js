@@ -4,4 +4,6 @@ import url from "./url"
 
 import dateFormat from "./date"
 
-export { cookie, url, dateFormat }
+import WStore from "./storage"
+
+export { cookie, url, dateFormat, WStore }
