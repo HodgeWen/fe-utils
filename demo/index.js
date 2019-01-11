@@ -27,7 +27,7 @@ import {
   isNum
 } from "../src/index"
 
-import { cookie, url } from "../src/index"
+import { cookie, url, dateFormat } from "../src/index"
 
 $.use(
   hasClass,
@@ -43,7 +43,8 @@ $.use(
   setNode,
   eq
 )
-wt.use(
+wt
+  .use
   // add,
   // minus,
   // serialize
@@ -53,8 +54,9 @@ wt.use(
   // isFunc,
   // isStr,
   // isNum
-)
+  ()
 window.wt = wt
 window.$ = $
 window.url = url
 window.cookie = cookie
+window.dateFormat = dateFormat

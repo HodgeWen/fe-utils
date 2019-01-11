@@ -1,14 +1,13 @@
-import { wt, json, serialize } from "../data"
+import { json, serialize } from "../data"
 
-// wt.use(json, serialize)
 class Cookie {
   get(key) {
-    const json = wt(document.cookie).json()
-    return key !== undefined ? json[key] : json
+    const ret = json.call(document.cookie)
+    return key !== undefined ? ret[key] : ret
   }
 
   set(conf) {
-    document.cookie = wt(conf).serialize()
+    document.cookie = serialize.call(conf)
   }
 }
 

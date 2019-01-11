@@ -31,7 +31,8 @@ import {
 
 import {
   cookie,
-  url
+  url,
+  dateFormat
 } from './utils'
 
 export {
@@ -64,5 +65,6 @@ export {
   isNum,
   // 工具
   cookie,
-  url
+  url,
+  dateFormat
 }
