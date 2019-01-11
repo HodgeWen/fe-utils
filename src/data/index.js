@@ -1,4 +1,4 @@
-import { add, minus } from "./array"
+import { add, minus, set } from "./array"
 
 import { serialize } from "./object"
 
@@ -57,4 +57,4 @@ wt.use = function(...funcs) {
   })
 }
 
-export { wt, add, minus, serialize, json, isArr, isObj, isFunc, isStr, isNum }
+export { wt, add, minus, set, serialize, json, isArr, isObj, isFunc, isStr, isNum }

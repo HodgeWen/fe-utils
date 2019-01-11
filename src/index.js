@@ -11,14 +11,13 @@ import {
   css,
   prop,
   eq
-} from './dom'
+} from "./dom"
 
 import {
   wt,
-  getType,
-  each,
   add,
   minus,
+  set,
   serialize,
   json,
   isArr,
@@ -26,17 +25,17 @@ import {
   isFunc,
   isStr,
   isNum
-} from './data'
+} from "./data"
 
-import {
+import { cookie, url, dateFormat } from "./utils"
+
+const utils = {
   cookie,
   url,
   dateFormat
-} from './utils'
+}
 
-export {
-  // dom
-  $,
+$.use(
   hasClass,
   addClass,
   removeClass,
@@ -47,23 +46,9 @@ export {
   append,
   css,
   prop,
-  setNode,
-  eq,
-  // 数据
-  wt,
-  getType,
-  each,
-  add,
-  minus,
-  serialize,
-  json,
-  isArr,
-  isObj,
-  isFunc,
-  isStr,
-  isNum,
-  // 工具
-  cookie,
-  url,
-  dateFormat
-}
+  eq
+)
+
+wt.use(add, minus, set, serialize, json, isArr, isObj, isFunc, isStr, isNum)
+
+export { $, wt, utils }
