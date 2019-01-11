@@ -4,7 +4,7 @@ import { serialize } from "./object"
 
 import { json } from "./string"
 
-import { getType } from '../common'
+import { getType, each } from "../common"
 
 import { isArr, isObj, isFunc, isStr, isNum } from "./types"
 
@@ -18,30 +18,41 @@ const pt = (DataWrap.prototype = Object.create(null))
 pt.constructor = DataWrap
 
 pt.each = function(handle) {
-  const data = this.data ? this.data : this
-  const type = getType(data).slice(data)
-
-  // 普通对象
-  if (type === "Object" && data.length === undefined) {
-    for (let key in data) {
-      if (data.hasOwnProperty(key)) {
-        if (handle(data[key], key, data) === false) return false
+  const data = this.data
+  const type = getType(data)
+  const table = {
+    Object() {
+      for (let key in data) {
+        if (
+          data.hasOwnProperty(key) &&
+          handle(data[key], key, data) === false
+        ) {
+          return false
+        }
       }
+      return true
+    },
+    Number() {
+      for (let i = 1; i <= data; i++) {
+        if (handle(i, data) === false) return false
+      }
+      return true
+    },
+    Array() {
+      for (let i = 0, len = data.length; i < len; i++) {
+        if (handle(data[i], i, data) === false) return false
+      }
+      return true
+    },
+    String() {
+      for (let i = 0, len = data.length; i < len; i++) {
+        if (handle(data[i], i, data) === false) return false
+      }
+      return true
     }
-    return true
   }
-  // 数字
-  if (type === "Number") {
-    for (let i = 1; i <= data; i++) {
-      if (handle(i, data) === false) return false
-    }
-    return true
-  }
-  // 数组或者伪数组
-  for (let i = 0, len = data.length; i < len; i++) {
-    if (handle(data[i], i, data) === false) return false
-  }
-  return true
+
+  return table[type] ? table[type]() : false
 }
 
 function wt(any) {
@@ -49,7 +60,7 @@ function wt(any) {
 }
 
 wt.use = function(...funcs) {
-  wt(funcs).each(fn => {
+  each(funcs, fn => {
     const key = fn.name
     if (!pt[key]) {
       pt[key] = fn
@@ -58,4 +69,5 @@ wt.use = function(...funcs) {
 }
 
 export default wt
+
 export { add, minus, set, serialize, json, isArr, isObj, isFunc, isStr, isNum }
