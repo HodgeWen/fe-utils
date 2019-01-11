@@ -1,5 +1,4 @@
-import {
-  $,
+import $, {
   hasClass,
   addClass,
   removeClass,
@@ -13,8 +12,7 @@ import {
   eq
 } from "./dom"
 
-import {
-  wt,
+import wt, {
   add,
   minus,
   set,

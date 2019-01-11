@@ -27,7 +27,7 @@ pt.constructor = Selector
 pt.push = ap.push
 pt.slice = ap.slice
 pt.splice = ap.splice
-pt.each = function (callback) {
+pt.each = function(callback) {
   for (let i = 0, len = this.length; i < len; i++) {
     callback(this[i], i)
   }
@@ -43,8 +43,8 @@ $.use = function(...funcs) {
   }
 }
 
+export default $
 export {
-  $,
   hasClass,
   addClass,
   removeClass,

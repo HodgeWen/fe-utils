@@ -57,4 +57,5 @@ wt.use = function(...funcs) {
   })
 }
 
-export { wt, add, minus, set, serialize, json, isArr, isObj, isFunc, isStr, isNum }
+export default wt
+export { add, minus, set, serialize, json, isArr, isObj, isFunc, isStr, isNum }
