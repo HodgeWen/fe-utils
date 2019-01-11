@@ -40,7 +40,6 @@ $.use(
   append,
   css,
   prop,
-  setNode,
   eq
 )
 wt

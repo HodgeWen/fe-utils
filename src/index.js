@@ -10,7 +10,6 @@ import {
   append,
   css,
   prop,
-  setNode,
   eq
 } from './dom'
 
