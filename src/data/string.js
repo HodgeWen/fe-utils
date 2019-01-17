@@ -1,5 +1,6 @@
 import { each } from "../common"
 
+// 字符串转成json
 function json() {
   const ret = {}
   const data = this.data !== undefined ? this.data : this
@@ -14,6 +15,15 @@ function json() {
     })
   }
   return ret
+}
+
+
+function upper() {
+  
+}
+
+function lower() {
+
 }
 
 export { json }

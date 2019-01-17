@@ -41,6 +41,10 @@ export default class WStore {
     return this
   }
 
+  remove(item) {
+    this.storage.removeItem(item)
+  }
+
   clear() {
     this.storage.clear()
   }
