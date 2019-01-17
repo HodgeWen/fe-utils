@@ -1,5 +1,5 @@
 {
-  "name": "fe-utils",
+  "name": "@fe/utils",
   "version": "1.0.0",
   "main": "index.js",
   "repository": "git@github.com:wenhongjie/fe-utils.git",
@@ -18,7 +18,6 @@
   },
   "scripts": {
     "test": "jest",
-    "dev": "webpack-dev-server --config webpack.dev.js",
-    "build": "webpack --config webpack.prod.js"
+    "dev": "webpack-dev-server --config webpack.dev.js"
   }
 }
