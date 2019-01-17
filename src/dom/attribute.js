@@ -9,14 +9,11 @@ function attr(...params) {
     return this
   }
   if (type === "String") {
-    return this[0].getAttribute(param)
+    return this[0].getAttribute(param1)
   }
   if (type === "Array") {
-    const arr = []
-    for (let i = 0, len = param1.length; i < len; i++) {
-      arr.push(this[0].getAttribute(param1[i]))
-    }
-    return arr
+    const node = this[0]
+    return param1.map(v => node.getAttribute(v))
   }
   this.each(node => {
     for (const key in param1) {
