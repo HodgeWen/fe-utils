@@ -26,4 +26,6 @@ function lower() {
 
 }
 
+json.name = 'json'
+
 export { json }

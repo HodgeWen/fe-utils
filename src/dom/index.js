@@ -1,8 +1,8 @@
-import { find, eq } from "./selector"
+import { find, eq, not } from "./selector"
 
 import { hasClass, addClass, removeClass } from "./class"
 
-import { attr, prop } from "./attribute"
+import { attr, prop, val, html, text } from "./attribute"
 
 import { append } from "./element"
 
@@ -59,23 +59,10 @@ $.use = function(...funcs) {
 export default $
 
 export {
-  hasClass,
-  addClass,
-  removeClass,
-  attr,
-  on,
-  off,
-  click,
-  mouseenter,
-  mouseleave,
-  mousedown,
-  mousemove,
-  mouseup,
-  scroll,
-  resize,
-  find,
+  find, eq, not,
+  hasClass, addClass, removeClass,
+  attr, prop, val, html, text,
   append,
-  css,
-  prop,
-  eq
+  on, off,  click, mouseenter, mouseleave, mousedown, mousemove, mouseup, scroll, resize,
+  css
 }

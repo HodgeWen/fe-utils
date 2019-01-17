@@ -20,4 +20,6 @@ function css(...params) {
   return this
 }
 
+css.name = "css"
+
 export { css }
