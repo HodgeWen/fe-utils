@@ -9,4 +9,8 @@ function eq(index) {
   return this
 }
 
-export { find, eq }
+function not(sn) {
+  
+}
+
+export { find, eq, not }

@@ -6,17 +6,30 @@ import { attr, prop } from "./attribute"
 
 import { append } from "./element"
 
-import { on, off } from "./event"
+import {
+  on,
+  off,
+  click,
+  mouseenter,
+  mouseleave,
+  mousedown,
+  mousemove,
+  mouseup,
+  scroll,
+  resize
+} from "./event"
 
 import { css } from "./style"
 
 function Selector(str) {
   this.length = 0
-  if (str) {
+  if (typeof str === "string") {
     this.selector = str
+    const nodeList = document.querySelectorAll(str)
+    this.push(...nodeList)
+  } else {
+    this.push(str)
   }
-  let nodeList = document.querySelectorAll(str)
-  this.push(...nodeList)
 }
 
 const pt = (Selector.prototype = Object.create(null))
@@ -44,6 +57,7 @@ $.use = function(...funcs) {
 }
 
 export default $
+
 export {
   hasClass,
   addClass,
@@ -51,6 +65,14 @@ export {
   attr,
   on,
   off,
+  click,
+  mouseenter,
+  mouseleave,
+  mousedown,
+  mousemove,
+  mouseup,
+  scroll,
+  resize,
   find,
   append,
   css,

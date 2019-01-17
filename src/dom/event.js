@@ -1,26 +1,24 @@
-import { getType } from "../common"
-function on(eventType, handler, propagation = true) {
-  const type = getType(handler)
-  if (type === "Object") {
-    this.each(node => {
-      node.addEventListener(
-        eventType,
-        e => {
-          const className = e.target.className
-          const targetClass = className && className.split(" ")[0]
-          handler[targetClass] && handler[targetClass](node, e)
-        },
-        propagation
-      )
-    })
-    return this
+function on(eventType, child, handler, bubble = true) {
+  const firstCharacter = child.slice(0, 1)
+  let key = "tagName"
+  if (firstCharacter === "#") {
+    key = "id"
+    child = child.slice(1)
   }
-  if (type === "Function") {
-    this.each(node => {
-      node.addEventListener(eventType, handler, propagation)
-    })
-    return this
+  if (firstCharacter === ".") {
+    key = "className"
+    child = child.slice(1)
   }
+  this.each(node => {
+    node.addEventListener(
+      eventType,
+      ev => {
+        ev.target[key].toLowerCase().indexOf(child) !== -1 &&
+          handler.call(ev.target, ev)
+      },
+      bubble
+    )
+  })
   return this
 }
 
@@ -29,4 +27,55 @@ function off(type, handler) {
   return this
 }
 
-export { on, off }
+function click(handler, bubble = true) {
+  this.each(node => node.addEventListener("click", handler, bubble))
+  return this
+}
+
+function mouseenter(handler, bubble = true) {
+  this.each(node => node.addEventListener("mouseenter", handler, bubble))
+  return this
+}
+
+function mouseleave(handler, bubble = true) {
+  this.each(node => node.addEventListener("mouseleave", handler, bubble))
+  return this
+}
+
+function mousedown(handler, bubble = true) {
+  this.each(node => node.addEventListener("mousedown", handler, bubble))
+  return this
+}
+
+function mousemove(handler, bubble = true) {
+  this.each(node => node.addEventListener("mousemove", handler, bubble))
+  return this
+}
+
+function mouseup(handler, bubble = true) {
+  this.each(node => node.addEventListener("mouseup", handler, bubble))
+  return this
+}
+
+function scroll(handler, bubble = true) {
+  this.each(node => node.addEventListener("scroll", handler, bubble))
+  return this
+}
+
+function resize(handler, bubble = true) {
+  this.each(node => node.addEventListener("resize", handler, bubble))
+  return this
+}
+
+export {
+  on,
+  off,
+  click,
+  mouseenter,
+  mouseleave,
+  mousedown,
+  mousemove,
+  mouseup,
+  scroll,
+  resize
+}
