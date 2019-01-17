@@ -68,4 +68,10 @@ function text(value) {
   return this[0].innerText
 }
 
+attr.key = "attr"
+prop.key = "prop"
+val.key = "val"
+html.key = "html"
+text.key = "text"
+
 export { attr, prop, val, html, text }

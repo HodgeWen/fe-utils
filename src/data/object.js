@@ -28,4 +28,7 @@ function dataReset() {
   return ret
 }
 
+serialize.key = 'serialize'
+dataReset.key = 'dataReset'
+
 export { serialize, dataReset }

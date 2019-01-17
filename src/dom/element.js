@@ -5,4 +5,6 @@ function append(child, deep = true) {
   return this
 }
 
+append.key = 'append'
+
 export { append }

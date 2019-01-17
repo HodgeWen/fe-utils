@@ -26,4 +26,6 @@ function lower() {
 
 }
 
+json.key = 'json'
+
 export { json }

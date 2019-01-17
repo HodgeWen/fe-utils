@@ -22,4 +22,11 @@ function isBoo() {
   return this.type === "Boolean"
 }
 
+isArr.key = 'isArr'
+isObj.key = 'isObj'
+isFunc.key = 'isFunc'
+isStr.key = 'isStr'
+isNum.key = 'isNum'
+isBoo.key = 'isBoo'
+
 export { isArr, isObj, isFunc, isStr, isNum, isBoo }

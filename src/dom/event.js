@@ -67,6 +67,17 @@ function resize(handler, bubble = true) {
   return this
 }
 
+on.key = "on"
+off.key = "off"
+click.key = "click"
+mouseenter.key = "mouseenter"
+mouseleave.key = "mouseleave"
+mousedown.key = "mousedown"
+mousemove.key = "mousemove"
+mouseup.key = "mouseup"
+scroll.key = "scroll"
+resize.key = "resize"
+
 export {
   on,
   off,

@@ -12,4 +12,8 @@ function removeClass(className) {
   return this
 }
 
+hasClass.key = "hasClass"
+addClass.key = "addClass"
+removeClass.key = "removeClass"
+
 export { hasClass, addClass, removeClass }

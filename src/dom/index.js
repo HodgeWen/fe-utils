@@ -52,17 +52,36 @@ function $(str) {
 
 $.use = function(...funcs) {
   for (let i = 0, len = funcs.length; i < len; i++) {
-    pt[funcs[i].name] = funcs[i]
+    if (!pt[funcs[i].key]) {
+      pt[funcs[i].key] = funcs[i]
+    }
   }
 }
 
 export default $
 
 export {
-  find, eq, not,
-  hasClass, addClass, removeClass,
-  attr, prop, val, html, text,
+  find,
+  eq,
+  not,
+  hasClass,
+  addClass,
+  removeClass,
+  attr,
+  prop,
+  val,
+  html,
+  text,
   append,
-  on, off,  click, mouseenter, mouseleave, mousedown, mousemove, mouseup, scroll, resize,
+  on,
+  off,
+  click,
+  mouseenter,
+  mouseleave,
+  mousedown,
+  mousemove,
+  mouseup,
+  scroll,
+  resize,
   css
 }

@@ -61,7 +61,7 @@ function wt(any) {
 
 wt.use = function(...funcs) {
   each(funcs, fn => {
-    const key = fn.name
+    const key = fn.key
     if (!pt[key]) {
       pt[key] = fn
     }
