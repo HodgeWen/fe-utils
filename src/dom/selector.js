@@ -11,8 +11,4 @@ function eq(index) {
 
 function not(sn) {}
 
-find.name = "find"
-eq.name = "eq"
-not.eq = "not"
-
 export { find, eq, not }

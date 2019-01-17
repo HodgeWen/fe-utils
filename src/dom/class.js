@@ -12,8 +12,4 @@ function removeClass(className) {
   return this
 }
 
-hasClass.name = "hasClass"
-addClass.name = "addClass"
-removeClass.name = "removeClass"
-
 export { hasClass, addClass, removeClass }

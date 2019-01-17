@@ -68,10 +68,4 @@ function text(value) {
   return this[0].innerText
 }
 
-attr.name = "attr"
-prop.name = "prop"
-val.name = "val"
-html.name = "html"
-text.name = "text"
-
 export { attr, prop, val, html, text }

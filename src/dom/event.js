@@ -67,17 +67,6 @@ function resize(handler, bubble = true) {
   return this
 }
 
-on.name = "on"
-off.name = "off"
-click.name = "click"
-mouseenter.name = "mouseenter"
-mouseleave.name = "mouseleave"
-mousedown.name = "mousedown"
-mousemove.name = "mousemove"
-mouseup.name = "mouseup"
-scroll.name = "scroll"
-resize.name = "resize"
-
 export {
   on,
   off,
