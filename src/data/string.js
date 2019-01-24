@@ -3,8 +3,8 @@ import { each } from "../common"
 // 字符串转成json
 function json() {
   const ret = {}
-  const data = this.data !== undefined ? this.data : this
-  const str = data.indexOf("?") === 0 ? data.slice(1) : data
+  const ctx = this.data !== undefined ? this.data : this
+  const str = ctx.indexOf("?") === 0 ? ctx.slice(1) : ctx
   if (str) {
     const couple = str.split("&")
     each(couple, v => {

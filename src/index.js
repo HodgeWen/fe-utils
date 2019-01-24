@@ -34,7 +34,8 @@ import wt, {
   isObj,
   isFunc,
   isStr,
-  isNum
+  isNum,
+  map
 } from "./data"
 
 import { cookie, url, dateFormat, WStore } from "./utils"
@@ -72,6 +73,18 @@ $.use(
   css
 )
 
-wt.use(add, minus, set, serialize, json, isArr, isObj, isFunc, isStr, isNum)
+wt.use(
+  add,
+  minus,
+  set,
+  serialize,
+  json,
+  isArr,
+  isObj,
+  isFunc,
+  isStr,
+  isNum,
+  map
+)
 
 export { $, wt, utils }
