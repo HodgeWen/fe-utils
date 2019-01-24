@@ -1,5 +1,5 @@
 function hasClass(className) {
-  return this[0].contains(className)
+  return this[0].classList.contains(className)
 }
 
 function addClass(className) {

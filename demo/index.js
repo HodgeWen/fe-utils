@@ -1,7 +1,11 @@
-import { $, wt, utils } from "../src/index"
+// import { $, wt, utils } from "../src/index"
 
-// import wt, {serialize, json} from '../src/data'
-// wt.use(serialize, json)
+import $, { val, hasClass } from '../src/dom'
+import wt from '../src/data'
+import utils from '../src/utils'
+
+$.use(val, hasClass)
+
 window.wt = wt
 
 window.$ = $
