@@ -1,6 +1,6 @@
 import { add, minus, set } from "./array"
 
-import { serialize, dataReset } from "./object"
+import { serialize, dataReset, keys, values } from "./object"
 
 import { json } from "./string"
 
@@ -8,7 +8,7 @@ import { getType, each } from "../common"
 
 import { isArr, isObj, isFunc, isStr, isNum } from "./types"
 
-import {map} from './common'
+import { map } from "./common"
 
 function DataWrap(any) {
   this.data = any
@@ -84,5 +84,7 @@ export {
   isStr,
   isNum,
   dataReset,
-  map
+  map,
+  keys,
+  values
 }

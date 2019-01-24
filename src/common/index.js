@@ -16,4 +16,8 @@ function getType(data) {
   return Object.prototype.toString.call(data).slice(8, -1)
 }
 
-export { each, eachObj, getType }
+function getCtx(ctx) {
+  return ctx.data !== undefined ? ctx.data : ctx 
+}
+
+export { each, eachObj, getType, getCtx }

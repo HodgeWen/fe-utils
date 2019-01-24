@@ -1,9 +1,9 @@
-import { eachObj, getType } from "../common"
+import { eachObj, getType, getCtx } from "../common"
 
 function serialize() {
   let ret = ""
-  const data = this.data !== undefined ? this.data : this
-  eachObj(data, (val, key) => {
+  const ctx = getCtx(this)
+  eachObj(ctx, (val, key) => {
     const g =
       val && typeof val === "object"
         ? `${key}=${JSON.stringify(val)}&`
@@ -15,7 +15,7 @@ function serialize() {
 
 function dataReset() {
   const ret = {}
-  const ctx = this.data !== undefined ? this.data : this
+  const ctx = getCtx(this)
   const table = {
     Array: [],
     Object: {},
@@ -28,7 +28,19 @@ function dataReset() {
   return ret
 }
 
+function keys () {
+  const ctx = getCtx(this)
+  return Object.keys(ctx)
+}
+
+function values () {
+  const ctx = getCtx(this)
+  return Object.values(ctx)
+}
+
 serialize.key = 'serialize'
 dataReset.key = 'dataReset'
+keys.key = 'keys'
+values.key = 'values'
 
-export { serialize, dataReset }
+export { serialize, dataReset, keys, values }
