@@ -1,8 +1,16 @@
 import $, {
+  find,
+  eq,
+  not,
   hasClass,
   addClass,
   removeClass,
   attr,
+  prop,
+  val,
+  html,
+  text,
+  append,
   on,
   off,
   click,
@@ -13,11 +21,7 @@ import $, {
   mouseup,
   scroll,
   resize,
-  find,
-  append,
-  css,
-  prop,
-  eq
+  css
 } from "./dom"
 
 import wt, {
@@ -43,10 +47,18 @@ const utils = {
 }
 
 $.use(
+  find,
+  eq,
+  not,
   hasClass,
   addClass,
   removeClass,
   attr,
+  prop,
+  val,
+  html,
+  text,
+  append,
   on,
   off,
   click,
@@ -57,11 +69,7 @@ $.use(
   mouseup,
   scroll,
   resize,
-  find,
-  append,
-  css,
-  prop,
-  eq
+  css
 )
 
 wt.use(add, minus, set, serialize, json, isArr, isObj, isFunc, isStr, isNum)
