@@ -59,7 +59,7 @@ pt.each = function(handle) {
 
 pt.pipe = function (...funcs) {
   each(funcs, func => {
-    this.data = func.call(this)
+    this.data = func.name ? func.call(this) : func(this)
     this.type = getType(this.data)
   })
   return this.data
