@@ -57,6 +57,14 @@ pt.each = function(handle) {
   return table[type] ? table[type]() : false
 }
 
+pt.pipe = function (...funcs) {
+  each(funcs, func => {
+    this.data = func.call(this)
+    this.type = getType(this.data)
+  })
+  return this.data
+}
+
 function wt(any) {
   return new DataWrap(any)
 }

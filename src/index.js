@@ -35,7 +35,9 @@ import wt, {
   isFunc,
   isStr,
   isNum,
-  map
+  map,
+  keys,
+  values
 } from "./data"
 
 import { cookie, url, dateFormat, WStore } from "./utils"
@@ -84,7 +86,9 @@ wt.use(
   isFunc,
   isStr,
   isNum,
-  map
+  map,
+  keys,
+  values
 )
 
 export { $, wt, utils }
