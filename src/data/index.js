@@ -60,8 +60,8 @@ pt.each = function(handle) {
 pt.pipe = function (...args) {
   const ctx = this
   const map = {
-    String: key => ctx[key](),
-    Function: func => func.name ? func.call(ctx) : func(this)
+    String: arg => ctx[arg](),
+    Function: arg => arg(ctx)
   }
   each(args, arg => {
     this.data = map[getType(arg)](arg)
