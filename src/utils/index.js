@@ -6,4 +6,6 @@ import dateFormat from "./date"
 
 import WStore from "./storage"
 
-export { cookie, url, dateFormat, WStore }
+import Pro from './promise'
+
+export { cookie, url, dateFormat, WStore, Pro }
