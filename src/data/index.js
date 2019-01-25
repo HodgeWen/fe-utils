@@ -57,9 +57,14 @@ pt.each = function(handle) {
   return table[type] ? table[type]() : false
 }
 
-pt.pipe = function (...funcs) {
-  each(funcs, func => {
-    this.data = func.name ? func.call(this) : func(this)
+pt.pipe = function (...args) {
+  const ctx = this
+  const map = {
+    String: key => ctx[key](),
+    Function: func => func.name ? func.call(ctx) : func(this)
+  }
+  each(args, arg => {
+    this.data = map[getType(arg)](arg)
     this.type = getType(this.data)
   })
   return this.data
