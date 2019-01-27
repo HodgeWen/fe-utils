@@ -20,7 +20,7 @@ function set(id) {
   const obj = Object.create(null)
   const arr = []
   if (id === undefined) {
-    return each(ctx, v => {
+    each(ctx, v => {
       const type = typeof v
       const key = type + v
       if (!obj[key]) { 
@@ -28,15 +28,15 @@ function set(id) {
         arr.push(v)
       }
     })
+    return arr
   }
   each(ctx, v => {
-    const key = v.id
+    const key = v[id]
     if (!obj[key]) {
       obj[key] = true
       arr.push(v)
     }
   })
-  
   return arr
 }
 

@@ -1,6 +1,6 @@
 {
   "name": "wt-utils",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "main": "src/index.js",
   "repository": "git@github.com:wenhongjie/fe-utils.git",
   "author": "wen <emailwen@qq.com>",
@@ -19,6 +19,7 @@
   },
   "scripts": {
     "test": "jest",
-    "dev": "webpack-dev-server --config webpack.dev.js"
+    "dev": "webpack-dev-server --config webpack.dev.js",
+    "build:demo": "webpack --config webpack.demo.build.js"
   }
 }

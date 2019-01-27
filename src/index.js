@@ -36,6 +36,8 @@ import wt, {
   isFunc,
   isStr,
   isNum,
+  isBoo,
+  dataReset,
   map,
   keys,
   values
@@ -88,6 +90,8 @@ wt.use(
   isFunc,
   isStr,
   isNum,
+  isBoo,
+  dataReset,
   map,
   keys,
   values

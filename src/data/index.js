@@ -6,7 +6,7 @@ import { json } from "./string"
 
 import { getType, each } from "../common"
 
-import { isArr, isObj, isFunc, isStr, isNum } from "./types"
+import { isArr, isObj, isFunc, isStr, isNum, isBoo } from "./types"
 
 import { map } from "./common"
 
@@ -96,6 +96,7 @@ export {
   isFunc,
   isStr,
   isNum,
+  isBoo,
   dataReset,
   map,
   keys,
