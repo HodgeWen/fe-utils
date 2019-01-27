@@ -1,5 +1,9 @@
 function find(qs) {
-  return this[0].querySelectorAll(qs)
+  this.splice(0)
+  this.selector = this.selector + ' ' + qs
+  const nodeList = document.querySelectorAll(this.selector)
+  this.push(...nodeList)
+  return this
 }
 
 function eq(index) {
@@ -9,7 +13,9 @@ function eq(index) {
   return this
 }
 
-function not(sn) {}
+function not(sn) {
+  
+}
 
 find.key = "find"
 eq.key = "eq"

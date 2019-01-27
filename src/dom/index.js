@@ -1,6 +1,6 @@
 import { find, eq, not } from "./selector"
 
-import { hasClass, addClass, removeClass } from "./class"
+import { hasClass, addClass, removeClass, toggleClass } from "./class"
 
 import { attr, prop, val, html, text } from "./attribute"
 
@@ -46,6 +46,13 @@ pt.each = function(callback) {
   }
 }
 
+pt.env = (function () {
+  const ua = navigator.userAgent.toLowerCase()
+  const isLtIe11 = ua.match(/msie\s[\d\.]+/) 
+  const isGtIe10 = isLtIe11 && +isLtIe11[0].split(' ')[1] >= 10
+  return !isLtIe11 || isGtIe10
+})()
+
 function $(str) {
   return new Selector(str)
 }
@@ -67,6 +74,7 @@ export {
   hasClass,
   addClass,
   removeClass,
+  toggleClass,
   attr,
   prop,
   val,

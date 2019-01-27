@@ -66,13 +66,13 @@ const p1 = new Pro((resolve, reject) => {
   }, 1000);
 })
 
-async function aa() {
-  let a = 1
-  p1.then(res => {
-    return 2
-  }).then(res => console.log(res))
-}
-aa()
+// async function aa() {
+//   let a = 1
+//   p1.then(res => {
+//     return 2
+//   }).then(res => console.log(res))
+// }
+// aa()
 // p1.then(res => 2).then(res => console.log(res))//catch(err => console.log(err))
 
 // export default Pro
