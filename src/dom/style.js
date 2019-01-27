@@ -3,7 +3,7 @@ import { getType } from "../common"
 function css(...params) {
   const param1 = params[0]
   const param2 = params[1]
-  if (param2) {
+  if (param2 !== undefined) {
     this.each(node => (node.style[param1] = param2))
     return this
   }
