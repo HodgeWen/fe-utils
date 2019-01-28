@@ -9,20 +9,21 @@ function request ({
   data = {},
   headers = {},
   dataType = 'json',
-  method = 'get'
+  method = 'GET'
 } = {}) {
   if (self.fetch) {
+    const upMethod = method.toUpperCase()
+    const body = upMethod === 'GET' || upMethod === 'HEAD' ? null : JSON.stringify(data)
     const init = {
-      body: method.toUpperCase() === 'GET' || method.toUpperCase() === 'HEAD' ? null : JSON.stringify(data),
-      method: method.toUpperCase(),
-      headers: merge.call(headers, {
+      body,
+      method: upMethod,
+      headers: new Headers(merge.call(headers, {
         'Content-Type': tactics[dataType]
-      }),
-      // cache: 'no-cache',
-      // credentials: 'include',
-      // mode: 'no-cors',
+      })),
+      cache: 'no-cache',
+      mode: 'no-cors',
       // redirect: 'follow',
-      // referrer: 'no-referrer'
+      
     }
     return fetch(url, init).then(res => res.json())
   }

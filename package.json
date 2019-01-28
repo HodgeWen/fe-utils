@@ -20,6 +20,10 @@
   "scripts": {
     "test": "jest",
     "dev": "webpack-dev-server --config webpack.dev.js",
+    "server": "node service/index.js",
     "build:demo": "webpack --config webpack.demo.build.js"
+  },
+  "dependencies": {
+    "express": "^4.16.4"
   }
 }
