@@ -1,7 +1,7 @@
 # 前端工具库 FE utils
 
 ## 安装 install
-> npm i wt-utils 
+> npm i wt-utils   
 > yarn add wt-utils
 
 ## 使用 use
