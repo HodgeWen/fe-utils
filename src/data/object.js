@@ -35,6 +35,11 @@ function keys () {
 
 function values () {
   const ctx = getCtx(this)
+  if (!Object.values) {
+    const arr = []
+    eachObj(ctx, v => arr.push(v))
+    return arr
+  }
   return Object.values(ctx)
 }
 
