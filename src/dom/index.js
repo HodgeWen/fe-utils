@@ -26,7 +26,7 @@ function Selector(str) {
   if (typeof str === "string") {
     this.selector = str
     const nodeList = document.querySelectorAll(str)
-    this.push(...nodeList)
+    this.push.apply(this, nodeList)
   } else {
     this.push(str)
   }

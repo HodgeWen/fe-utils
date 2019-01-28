@@ -2,7 +2,7 @@ function find(qs) {
   this.splice(0)
   this.selector = this.selector + ' ' + qs
   const nodeList = document.querySelectorAll(this.selector)
-  this.push(...nodeList)
+  this.push.apply(this, nodeList)
   return this
 }
 

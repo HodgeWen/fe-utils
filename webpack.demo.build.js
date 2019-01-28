@@ -1,8 +1,12 @@
 const path = require('path')
 const Hwp = require('html-webpack-plugin')
 module.exports = {
-  entry: './demo/index',
+  entry: './demo/index.js',
   mode: 'production',
+  output: {
+    path: path.resolve(__dirname, 'dist'),
+    filename: 'fe-utils.js'
+  },
   module: {
     rules: [
       {
@@ -11,7 +15,8 @@ module.exports = {
         use: {
           loader: 'babel-loader',
           options: {
-            presets: ['@babel/preset-env']
+            presets: ['@babel/preset-env'],
+            babelrc: false
           }
         }
       }
