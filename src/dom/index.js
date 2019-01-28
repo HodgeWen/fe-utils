@@ -16,7 +16,9 @@ import {
   mousemove,
   mouseup,
   scroll,
-  resize
+  resize,
+  keyup,
+  keydown
 } from "./event"
 
 import { css } from "./style"
@@ -90,5 +92,7 @@ export {
   mouseup,
   scroll,
   resize,
+  keyup,
+  keydown,
   css
 }

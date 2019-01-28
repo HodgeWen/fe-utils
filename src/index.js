@@ -22,6 +22,8 @@ import $, {
   mouseup,
   scroll,
   resize,
+  keyup,
+  keydown,
   css
 } from "./dom"
 
@@ -40,17 +42,19 @@ import wt, {
   dataReset,
   map,
   keys,
-  values
+  values,
+  merge
 } from "./data"
 
-import { cookie, url, dateFormat, WStore, Pro } from "./utils"
+import { cookie, url, dateFormat, WStore, Pro, request } from "./utils"
 
 const utils = {
   cookie,
   url,
   dateFormat,
   WStore,
-  Pro
+  Pro,
+  request
 }
 
 $.use(
@@ -77,6 +81,8 @@ $.use(
   mouseup,
   scroll,
   resize,
+  keyup,
+  keydown,
   css
 )
 
@@ -85,6 +91,7 @@ wt.use(
   minus,
   set,
   serialize,
+  merge,
   json,
   isArr,
   isObj,

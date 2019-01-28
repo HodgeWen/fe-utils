@@ -1,6 +1,6 @@
 import { add, minus, set } from "./array"
 
-import { serialize, dataReset, keys, values } from "./object"
+import { serialize, dataReset, keys, values, merge } from "./object"
 
 import { json } from "./string"
 
@@ -90,6 +90,7 @@ export {
   minus,
   set,
   serialize,
+  merge,
   json,
   isArr,
   isObj,

@@ -1,4 +1,4 @@
-import { eachObj, getType, getCtx } from "../common"
+import {each, eachObj, getType, getCtx } from "../common"
 
 function serialize() {
   let ret = ""
@@ -43,9 +43,27 @@ function values () {
   return Object.values(ctx)
 }
 
+function merge (...args) {
+  const ctx = getCtx(this)
+  const ret = {}
+  eachObj(ctx, (val, key) => {
+    ret[key] = val
+  })
+  each(args, obj => {
+    eachObj(obj, (val, key) => {
+      if (!(key in ret)) {
+        ret[key] = val
+      }
+    })
+  })
+  
+  return ret
+}
+
 serialize.key = 'serialize'
 dataReset.key = 'dataReset'
 keys.key = 'keys'
 values.key = 'values'
+merge.key = 'merge'
 
-export { serialize, dataReset, keys, values }
+export { serialize, dataReset, keys, values, merge }

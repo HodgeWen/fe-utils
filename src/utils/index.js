@@ -8,4 +8,6 @@ import WStore from "./storage"
 
 import Pro from './promise'
 
-export { cookie, url, dateFormat, WStore, Pro }
+import request from './request'
+
+export { cookie, url, dateFormat, WStore, Pro, request }

@@ -67,6 +67,14 @@ function resize(handler, bubble = true) {
   return this
 }
 
+function keyup(handler, bubble = true) {
+  this.each(node => node.addEventListener("keyup", handler, bubble))
+}
+
+function keydown(handler, bubble = true) {
+  this.each(node => node.addEventListener("keydown", handler, bubble))
+}
+
 on.key = "on"
 off.key = "off"
 click.key = "click"
@@ -77,6 +85,8 @@ mousemove.key = "mousemove"
 mouseup.key = "mouseup"
 scroll.key = "scroll"
 resize.key = "resize"
+keyup.key = 'keyup'
+keydown.keydown = 'keydown'
 
 export {
   on,
@@ -88,5 +98,7 @@ export {
   mousemove,
   mouseup,
   scroll,
-  resize
+  resize,
+  keyup,
+  keydown
 }
