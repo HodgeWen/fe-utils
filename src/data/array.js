@@ -2,7 +2,7 @@ import {each} from '../common'
 
 function add(...args) {
   const ctx = this.data !== undefined ? this.data : this
-  return ctx.concat(...args)
+  return ctx.concat(args)
 }
 
 function minus(arr) {
@@ -13,7 +13,7 @@ function minus(arr) {
 function set(id) {
   const ctx = this.data !== undefined ? this.data : this
 
-  if (typeof Set !== 'undefined' && id === undefined) {
+  if (Array.from && id === undefined) {
     return Array.from(new Set(ctx))
   }
 
@@ -21,8 +21,7 @@ function set(id) {
   const arr = []
   if (id === undefined) {
     each(ctx, v => {
-      const type = typeof v
-      const key = type + v
+      const key = typeof v + v
       if (!obj[key]) { 
         obj[key] = true
         arr.push(v)

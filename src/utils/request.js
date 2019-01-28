@@ -1,8 +1,12 @@
 import Pro from './promise'
 
-if (self.fetch) {
-  
+function request (url, data) {
+  if (self.fetch) {
+    return fetch(url)
+  }
 }
+
+
 
 
 

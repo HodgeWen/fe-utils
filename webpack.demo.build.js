@@ -7,7 +7,7 @@ module.exports = {
     rules: [
       {
         test: /\.js$/,
-        include: path.resolve(__dirname, 'demo'), // 只打包demo下的
+        // include: path.resolve(__dirname, 'demo'), // 只打包demo下的
         use: {
           loader: 'babel-loader',
           options: {
