@@ -43,13 +43,14 @@ import wt, {
   values
 } from "./data"
 
-import { cookie, url, dateFormat, WStore } from "./utils"
+import { cookie, url, dateFormat, WStore, Pro } from "./utils"
 
 const utils = {
   cookie,
   url,
   dateFormat,
-  WStore
+  WStore,
+  Pro
 }
 
 $.use(

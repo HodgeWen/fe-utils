@@ -1,14 +1,14 @@
 const PENDING = "pending"
 const RESOLVED = "resolved"
 const REJECTED = "rejected"
-const _define = function (obj, prop, value, fn) {
+const _define = function(obj, prop, value, fn) {
   Object.defineProperty(obj, prop, {
-    get () {
+    get() {
       return value
     },
     set(newValue) {
       value = newValue
-      fn(obj)
+      fn(value)
     }
   })
 }
@@ -17,62 +17,49 @@ const _getDefine = (obj, prop) => Object.getOwnPropertyDescriptor(obj, prop)
 
 function Pro(fn) {
   const that = this
-  this.state = PENDING
+  this.status = PENDING
   this.excuteStack = []
   function resolve(value) {
-    if (that.state !== PENDING) return
+    if (that.status !== PENDING) return
+    that.status = RESOLVED
     that.value = value
-    that.state = RESOLVED
-    that.resolved = true
   }
 
   function reject(err) {
-    if (that.state !== PENDING) return
+    if (that.status !== PENDING) return
+    that.status = REJECTED
     that.err = err
-    that.state = REJECTED
-    that.rejected = true
   }
 
   fn(resolve, reject)
 }
 
-pt = Pro.prototype = Object.create(null)
+const pt = (Pro.prototype = Object.create(null))
 
 pt.constructor = Pro
 
 pt.then = function(fn) {
   this.excuteStack.push(fn)
-  console.log(this.excuteStack)
-  const hasDefineValue = _getDefine(this, 'value')
+  const hasDefineValue = _getDefine(this, "value")
   if (hasDefineValue) return this
-  _define(this, 'value', this.value, ctx => {
-    const value = this.excuteStack[0](ctx.value)
-    value ? ctx.value = value : false
+  _define(this, "value", null, val => {
+    if (!this.excuteStack.length) return false
+    const returnedValue = this.excuteStack[0](val)
     this.excuteStack.shift()
+    if (returnedValue !== undefined) {
+      this.value = returnedValue
+    }
   })
   return this
 }
 
 pt.catch = function(fn) {
-  _define(this, 'rejected', false, ctx => {
-    fn(ctx.err)
+  const hasDefineErr = _getDefine(this, "err")
+  if (hasDefineErr) return this
+  _define(this, "err", null, err => {
+    fn(err)
   })
+  return this
 }
 
-const p1 = new Pro((resolve, reject) => {
-  setTimeout(() => {
-    resolve('成功')
-    // reject('失败')
-  }, 1000);
-})
-
-// async function aa() {
-//   let a = 1
-//   p1.then(res => {
-//     return 2
-//   }).then(res => console.log(res))
-// }
-// aa()
-// p1.then(res => 2).then(res => console.log(res))//catch(err => console.log(err))
-
-// export default Pro
+export default Pro
