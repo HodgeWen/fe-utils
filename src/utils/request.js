@@ -1,6 +1,6 @@
 import Pro from './promise'
 import { merge } from '../data/object.js'
-import {getType} from '../common.js'
+import {getType} from '../common/index.js'
 const tactics = {
   json: 'application/json; charset=UTF-8'
 }
