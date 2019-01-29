@@ -13,11 +13,7 @@ function request ({
   method = 'GET'
 } = {}) {
   if (self.fetch) {
-    const upMethod = method.toUpperCase()
-
-    const new
-    dataType = dataType ? dataType
-    // const contentType = dataType ? dataType : 
+    const upMethod = method.toUpperCase() 
     const body = upMethod === 'GET' || upMethod === 'HEAD' ? null : JSON.stringify(data)
     const init = {
       body,
