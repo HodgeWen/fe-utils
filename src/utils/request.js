@@ -29,28 +29,28 @@ class Req {
 }
 
 const tactics = {
-  json: 'application/json'
+  json: 'application/json; charset=UTF-8'
 }
+
 function request ({
   url = '',
   data = {},
   headers = {},
-  dataType = 'json',
+  dataType = '',
   method = 'GET'
 } = {}) {
   if (self.fetch) {
-    const upMethod = method.toUpperCase()
+    const upMethod = method.toUpperCase() 
     const body = upMethod === 'GET' || upMethod === 'HEAD' ? null : JSON.stringify(data)
     const init = {
       body,
       method: upMethod,
-      headers: new Headers(merge.call(headers, {
+      headers: merge.call(headers, {
         'Content-Type': tactics[dataType]
-      })),
+      }),
       cache: 'no-cache',
-      mode: 'no-cors',
-      // redirect: 'follow',
-      
+      mode: 'cors',
+      redirect: 'follow',
     }
     return fetch(url, init).then(res => res.json())
   }
