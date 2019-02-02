@@ -1,6 +1,33 @@
 import Pro from './promise'
 import { merge } from '../data/object.js'
 
+class Req {
+  constructor () {
+
+  }
+  
+  fetch () {
+    return fetch(url, init).then(res => res.json())
+  }
+
+  ajax () {
+    const xhr = new XMLHttpRequest()
+  }
+
+  init () {
+    this.baseUrl = baseUrl
+  }
+
+  get () {
+
+  }
+
+  post () {
+
+  }
+
+}
+
 const tactics = {
   json: 'application/json'
 }
@@ -27,6 +54,7 @@ function request ({
     }
     return fetch(url, init).then(res => res.json())
   }
+  
 }
 
 request.key = 'request'
