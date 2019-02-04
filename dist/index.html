@@ -6,16 +6,16 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Document</title>
   <style>
-
-    div {
-      width: 100px;
-      height: 100px;
-      background: #cccccc;
-      text-align: center;
-    }
     .container {
       display: flex;
       justify-content: space-around;
+    }
+    .container div {
+      width: 200px;
+      height: 100px;
+      background: #cccccc;
+      text-align: center;
+      line-height: 100px;
     }
   </style>
 </head>
@@ -27,11 +27,13 @@
     <div class="item">
       class: item
     </div>
-    <div class="item"></div>
-    <div class="item"></div>
+    <div class="item">
+      <input type="text" class="input" placeholder="class: input">
+    </div>
+    <div class="item">
+      class: item
+    </div>
   </div>
-  
-
   <select>
     <option value="1">1</option>
     <option class="first" value="2">2</option>
