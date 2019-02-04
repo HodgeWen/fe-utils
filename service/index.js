@@ -22,4 +22,4 @@ app
       message: "测试成功"
     })
   })
-app.listen(8888)
+app.listen(80)
