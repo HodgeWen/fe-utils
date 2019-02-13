@@ -6,8 +6,7 @@ function add(...args) {
 }
 
 function minus(arr) {
-  const ctx = this.data !== undefined ? this.data : this
-  
+  const ctx = this.data !== undefined ? this.data : this 
 }
 
 function set(id) {
@@ -41,8 +40,13 @@ function set(id) {
 
 
 
+function toTree (id = 'id', pid = 'pid') {
+  const ctx = this.data !== undefined ? this.data : this
+}
+
 add.key = 'add'
 minus.key = 'minus'
 set.key = 'set'
+toTree.key = 'toTree'
 
-export { add, minus, set }
+export { add, minus, set, toTree }
