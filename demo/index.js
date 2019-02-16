@@ -1,5 +1,5 @@
 import { $, wt, utils } from "../src/index"
-import {BinarySearchTree} from '../src/algorithms'
+
 // import $, { val, hasClass } from '../src/dom' 
 // import wt, {json, serialize, dataReset, map, values, set, add} from '../src/data'
 // import * as utils from '../src/utils'
@@ -11,7 +11,6 @@ import {BinarySearchTree} from '../src/algorithms'
   ctx.$ = $
   ctx.wt = wt 
   ctx.utils = utils
-  ctx.BinarySearchTree = BinarySearchTree
 
   // ctx.arr = [
   //   {id: 0, pid: null},

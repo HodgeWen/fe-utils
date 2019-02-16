@@ -38,7 +38,9 @@ function set(id) {
   return arr
 }
 
-
+function quickSort() {
+  const ctx = this.data !== undefined ? this.data : this
+}
 
 function toTree (id = 'id', pid = 'pid') {
   const ctx = this.data !== undefined ? this.data : this
@@ -48,5 +50,6 @@ add.key = 'add'
 minus.key = 'minus'
 set.key = 'set'
 toTree.key = 'toTree'
+quickSort.key = 'quickSort'
 
-export { add, minus, set, toTree }
+export { add, minus, set, toTree, quickSort }
