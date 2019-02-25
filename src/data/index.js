@@ -1,4 +1,4 @@
-import { add, minus, set } from "./array"
+import { add, minus, set, toTree, quickSort } from "./array"
 
 import { serialize, dataReset, keys, values, merge } from "./object"
 
@@ -89,6 +89,8 @@ export {
   add,
   minus,
   set,
+  toTree,
+  quickSort,
   serialize,
   merge,
   json,

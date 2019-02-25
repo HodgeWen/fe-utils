@@ -11,4 +11,42 @@ import { $, wt, utils } from "../src/index"
   ctx.$ = $
   ctx.wt = wt 
   ctx.utils = utils
+
+  // ctx.arr = [
+  //   {id: 0, pid: null},
+  //   {id: 1, pid: 0},
+  //   {id: 2, pid: 0},
+  //   {id: 3, pid: 1},
+  //   {id: 4, pid: 1},
+  //   {id: 5, pid: 2},
+  //   {id: 6, pid: 2},
+  //   {id: 7, pid: 3}
+  // ]
+
+  // const tree = [
+  //   {
+  //     id: 0, pid: null, 
+  //     children: [
+  //       {
+  //         id: 1, pid: 0,
+  //         children: [
+  //           {
+  //             id: 3, pid: 1,
+  //             children: [
+  //               {id: 7, pid: 3}
+  //             ]
+  //           },
+  //           {id: 4, pid: 1}
+  //         ]
+  //       },
+  //       {
+  //         id: 2, pid: 0,
+  //         children: [
+  //           {id: 5, pid: 2},
+  //           {id: 6, pid: 2}
+  //         ]
+  //       }
+  //     ]
+  //   }
+  // ]
 }(window)

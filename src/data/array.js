@@ -41,5 +41,7 @@ function set(id) {
 add.key = 'add'
 minus.key = 'minus'
 set.key = 'set'
+toTree.key = 'toTree'
+quickSort.key = 'quickSort'
 
-export { add, minus, set }
+export { add, minus, set, toTree, quickSort }
