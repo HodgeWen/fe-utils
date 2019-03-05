@@ -20,6 +20,7 @@ function extend(sup) {
   const proto = Object.create(sup.prototype)
   proto.constructor = ctx
   ctx.prototype = proto
+  return ctx
 }
 
 map.key = 'map'
