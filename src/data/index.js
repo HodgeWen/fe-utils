@@ -8,7 +8,7 @@ import { getType, each } from "../common"
 
 import { isArr, isObj, isFunc, isStr, isNum, isBoo } from "./types"
 
-import { map } from "./common"
+import { map, extend } from "./common"
 
 function DataWrap(any) {
   this.data = any
@@ -57,6 +57,7 @@ pt.each = function(handle) {
   return table[type] ? table[type]() : false
 }
 
+
 pt.pipe = function (...args) {
   const ctx = this
   const map = {
@@ -102,6 +103,7 @@ export {
   isBoo,
   dataReset,
   map,
+  extend,
   keys,
   values
 }

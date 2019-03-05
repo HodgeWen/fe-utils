@@ -15,6 +15,14 @@ function map(fn) {
   return false
 }
 
-map.key = 'map'
+function extend(sup) {
+  const ctx = this.data !== undefined ? this.data : this
+  const proto = Object.create(sup.prototype)
+  proto.constructor = ctx
+  ctx.prototype = proto
+}
 
-export { map }
+map.key = 'map'
+extend.key = 'extend'
+
+export { map, extend }

@@ -43,6 +43,7 @@ import wt, {
   isBoo,
   dataReset,
   map,
+  extend,
   keys,
   values,
   merge
@@ -105,6 +106,7 @@ wt.use(
   isBoo,
   dataReset,
   map,
+  extend,
   keys,
   values
 )
