@@ -38,6 +38,14 @@ function set(id) {
 	return arr
 }
 
+function toTree () {
+	
+}
+
+function quickSort () {
+	
+}
+
 add.key = 'add'
 minus.key = 'minus'
 set.key = 'set'
