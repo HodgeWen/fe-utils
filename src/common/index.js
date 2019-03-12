@@ -1,5 +1,6 @@
 function each (arr, callback) {
-  for (let i = 0, len = arr.length; i < len; i++) {
+  let i = -1, len = arr.length
+  while (++i < len) {
     callback(arr[i], i)
   }
 }
@@ -16,8 +17,8 @@ function getType(data) {
   return Object.prototype.toString.call(data).slice(8, -1)
 }
 
-function getCtx(ctx) {
-  return ctx.data !== undefined ? ctx.data : ctx 
+function getCtx(any) {
+  return any.data !== undefined ? any.data : any 
 }
 
 export { each, eachObj, getType, getCtx }

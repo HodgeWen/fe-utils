@@ -1,49 +1,57 @@
-import { each } from '../common'
+import { each, getCtx, getType } from '../common'
 
 function add(...args) {
-	const ctx = this.data !== undefined ? this.data : this
-	return ctx.concat(args)
+  let ctx = getCtx(this)
+  let i = -1, len = args.length
+  if (len < 1) return ctx 
+
+  let ret = []
+
+  while (++i < len) {
+    getType(args[i]) !== "Array" ? ret.push(args[i]) : ret = ret.concat(args[i])
+  }
+  return ctx.concat(ret)
 }
 
 function minus(arr) {
-	const ctx = this.data !== undefined ? this.data : this
+  const ctx = getCtx(this)
 }
 
 function set(id) {
-	const ctx = this.data !== undefined ? this.data : this
+  const ctx = getCtx(this)
 
-	if (Array.from && id === undefined) {
-		return Array.from(new Set(ctx))
-	}
+  if (Array.from && id === undefined) {
+    return Array.from(new Set(ctx))
+  }
 
-	const obj = Object.create(null)
-	const arr = []
-	if (id === undefined) {
-		each(ctx, (v) => {
-			const key = typeof v + v
-			if (!obj[key]) {
-				obj[key] = true
-				arr.push(v)
-			}
-		})
-		return arr
-	}
-	each(ctx, (v) => {
-		const key = v[id]
-		if (!obj[key]) {
-			obj[key] = true
-			arr.push(v)
-		}
-	})
-	return arr
+  const obj = Object.create(null)
+  const arr = []
+  if (id === undefined) {
+    each(ctx, (v) => {
+      const key = typeof v + v
+      if (!obj[key]) {
+        obj[key] = true
+        arr.push(v)
+      }
+    })
+    return arr
+  }
+  each(ctx, (v) => {
+    const key = v[id]
+    if (!obj[key]) {
+      obj[key] = true
+      arr.push(v)
+    }
+  })
+  return arr
 }
 
-function toTree () {
-	
+function toTree() {
+
 }
 
-function quickSort () {
-	
+function quickSort() {
+
 }
 
 add.key = 'add'

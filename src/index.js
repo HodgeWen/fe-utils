@@ -27,27 +27,7 @@ import $, {
   css
 } from "./dom"
 
-import wt, {
-  add,
-  minus,
-  set,
-  toTree,
-  quickSort,
-  serialize,
-  json,
-  isArr,
-  isObj,
-  isFunc,
-  isStr,
-  isNum,
-  isBoo,
-  dataReset,
-  map,
-  extend,
-  keys,
-  values,
-  merge
-} from "./data"
+import wt from "./data"
 
 import { cookie, url, dateFormat, WStore, Pro, request } from "./utils"
 
@@ -89,26 +69,5 @@ $.use(
   css
 )
 
-wt.use(
-  add,
-  minus,
-  set,
-  toTree,
-  quickSort,
-  serialize,
-  merge,
-  json,
-  isArr,
-  isObj,
-  isFunc,
-  isStr,
-  isNum,
-  isBoo,
-  dataReset,
-  map,
-  extend,
-  keys,
-  values
-)
 
 export { $, wt, utils }

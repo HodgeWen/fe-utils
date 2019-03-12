@@ -8,22 +8,23 @@ import { getType, each } from "../common"
 
 import { isArr, isObj, isFunc, isStr, isNum, isBoo } from "./types"
 
-import { map, extend } from "./common"
+import { map, extend, copy } from "./common"
 
-function DataWrap(any) {
+function DWrap(any) {
   this.data = any
   this.type = getType(any)
 }
 
-const pt = (DataWrap.prototype = Object.create(null))
+const pt = (DWrap.prototype = Object.create(null))
 
-pt.constructor = DataWrap
+pt.constructor = DWrap
 
-pt.eachType = {
+pt.eachType = Object.freeze({
   Array(data, handle) {
-    for (let i = 0, len = data.length; i < len; i++) {
+    let i = -1, len = data.length
+    while (++i < len) {
       if (handle(data[i], i, data) === false) return false
-    }
+    }    
     return true
   },
   Object(data, handle) {
@@ -38,18 +39,21 @@ pt.eachType = {
     return true
   },
   Number(data, handle) {
-    for (let i = 1; i <= data; i++) {
+    let i = 0
+    if (data <= 0) return false
+    while (++i <= data) {
       if (handle(i, data) === false) return false
     }
     return true
   },
   String(data, handle) {
-    for (let i = 0, len = data.length; i < len; i++) {
+    let i = -1, len = data.length
+    while (++i < len) {
       if (handle(data[i], i, data) === false) return false
     }
     return true
   }
-}
+})
 
 pt.each = function(handle) {
   const data = this.data
@@ -73,7 +77,7 @@ pt.pipe = function (...args) {
 }
 
 function wt(any) {
-  return new DataWrap(any)
+  return new DWrap(any)
 }
 
 wt.use = function(...funcs) {
@@ -85,9 +89,7 @@ wt.use = function(...funcs) {
   })
 }
 
-export default wt
-
-export {
+wt.use(
   add,
   minus,
   set,
@@ -105,6 +107,9 @@ export {
   dataReset,
   map,
   extend,
+  copy,
   keys,
   values
-}
+)
+
+export default wt
