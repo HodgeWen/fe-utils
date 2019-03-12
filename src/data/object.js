@@ -1,13 +1,13 @@
 import {each, eachObj, getType, getCtx } from "../common"
 
-function serialize() {
+function serialize(separator = '&') {
   let ret = ""
   const ctx = getCtx(this)
   eachObj(ctx, (val, key) => {
     const g =
       val && typeof val === "object"
-        ? `${key}=${JSON.stringify(val)}&`
-        : `${key}=${encodeURIComponent(val)}&`
+        ? `${key}=${JSON.stringify(val) + separator}`
+        : `${key}=${encodeURIComponent(val) + separator}`
     ret += g
   })
   return ret.slice(0, -1)

@@ -113,3 +113,26 @@ wt.use(
 )
 
 export default wt
+
+export {
+  add,
+  minus,
+  set,
+  toTree,
+  quickSort,
+  serialize,
+  merge,
+  json,
+  isArr,
+  isObj,
+  isFunc,
+  isStr,
+  isNum,
+  isBoo,
+  dataReset,
+  map,
+  extend,
+  copy,
+  keys,
+  values
+}
