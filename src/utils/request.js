@@ -15,9 +15,12 @@ function createInstance (url, method, data, callback) {
 }
 
 // 创建一个基于XMLHttpRequest的请求客户端
-function createReq ({
-	url, method = 'GET', data, timeout = 18000, success = function () {},
-	failed = function () {}
+function requestClient ({
+	url, method = 'GET', data = {}, timeout = 18000, 
+	responseType = 'json', headers = {}, 
+	contentType = 'application/x-www-form-urlencoded; charset=utf-8',
+	success = function () {}, failed = function () {},
+	beforeSend = function (next) { next() },
 } = {}) {
 	const client = new XMLHttpRequest()
 	const reg = /^(get|head)$/i
@@ -34,19 +37,23 @@ function createReq ({
 	client.onreadystatechange = function () {
 		if (this.readyState !== 4) return false 	
 		if (this.status >= 400 && this.status < 600 ) {
-			failed(this.status, this.statusText)
+			return failed(this.status + this.statusText)
 		}
-
-		success(this)
+		return success(this.response)
 	}
 
 	client.open(method, url, true)
+
 	client.timeout = timeout
+
 	client.ontimeout = function () {
-		failed(this.status)
+		failed(this.status + '连接超时')
 	}
 
-	client.send(data)
+	let next = false
+	beforeSend(() => next = true)
+
+	next && client.send(data)
 }
 
 // 
@@ -59,13 +66,35 @@ class Request {
 	constructor () {
 		this.baseUrl = ''
 		this.timeout = 18000
+		this.hasFetchApi = window.fetch ? true : false
+		this._isHeadOrGetReg = /^(get|head)$/i
 	}
 
-	request () {
-		
+	request ({
+		url, method, data
+	} = {}) {
+		const isHeadOrGet = this._isHeadOrGetReg(method)
+		if (this.hasFetchApi) {
+			return fetch(url, {
+				body,
+				method: method,
+				headers: merge.call(headers, {
+					'Content-Type': data_tactics[dataType]
+				}),
+				cache: 'no-cache',
+				mode: 'cors',
+				redirect: 'follow'
+			}).then(res => res.json())
+		}
 
 		return new Pro((resolve, reject) => {
-
+			requestClient({
+				url, method, data, beforeSend, timeout,
+				success (res) { return resolve(res) },
+				failed (err) { return reject(err) },
+				responseType = 'json', headers = {}, 
+				contentType = 'application/x-www-form-urlencoded; charset=utf-8'
+			})
 		})
 	}
 
@@ -81,19 +110,19 @@ class Request {
 		})
 	}
 
-	delete () {
+	delete (url, data) {
 		return this.request({
 			method: 'DELETE', url, data
 		})
 	}
 
-	put () {
+	put (url, data) {
 		return this.request({
 			method: 'PUT', url, data
 		})
 	}
 
-	patch () {
+	patch (url, data) {
 		return this.request({
 			method: 'PATCH', url, data
 		})
