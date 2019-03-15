@@ -1,191 +1,188 @@
 import Ps from './promise'
-import { merge, serialize } from '../data/object.js'
+import { merge, serialize } from '../data'
+import { each, eachObj, getType } from '../common'
+const Pro = window.Promise || Ps 	// Promise兼容性初始化 
 
-const Pro = window.Promise || Ps // 初始化兼容
-const data_tactics = {
+// 创建一个请求客户端
+function createClient (Constructor, configs) {
+	const instance = new Constructor(configs) 											// 创建一个实例
+	const proto = Constructor.prototype
+
+	function request (options) {
+		return proto.request.call(instance, options)
+	}
+
+	function requestAddAttr (methods) {
+		each(methods, method => request[method] = function (url, data) {
+			return proto.request.call(instance, {
+				url, method, data
+			})
+		})
+	}
+
+	requestAddAttr(['get', 'post', 'put', 'delete', 'patch'])
+
+	request.key = 'request'
+	return request
+}
+
+// 基于 XMLHttpRequest 的请求函数
+function requestClient (iface) {
+
+
+	const {
+		url, method, data = {}, timeout,
+		responseType, headers, success, failed
+	} = iface
+
+	function readyStateChangeHandler () {
+		if (this.readyState !== 4) return false 	
+
+		if (this.status >= 400 && this.status < 600 ) {
+			return failed(this.status + ': ' + this.statusText)
+		}
+		
+		if (this.status >= 200 && this.status < 299) {
+			try {
+				return success(JSON.parse(this.response))
+			} catch (error) {
+				return failed('返回值与预期不符')
+			}
+		}
+	}
+
+	function timeoutHandler () {
+		return failed('请求超时')
+	}
+
+	const client = new XMLHttpRequest()
+	// 开启信道
+	client.open(method, url, true)
+	client.timeout = timeout 	// 设置超时时间
+	client.responseType = responseType // 期望的返回值
+
+	// 监听xhr状态
+	client.addEventListener('readystatechange', readyStateChangeHandler, false)
+	// 超时回调
+	client.addEventListener('timeout', timeoutHandler)
+
+	// 发送头部信息
+	eachObj(headers, (val, key) => {
+		client.setRequestHeader(key, val)
+	})
+	client.send(data)
+}
+
+class Request {
+
+	// 构造函数实例提供了所有的默认属性和默认方法
+	constructor ({
+		baseUrl = '',
+		timeout,
+		beforeSend,
+		headers = {},
+		responseType = 'text'
+	} = {}) {
+		this.baseUrl = baseUrl 				// 基础Url 
+		this.timeout = timeout				// 超时时间
+		this.beforeSend = beforeSend	// 发送之前
+		this.headers = headers 				// 默认发送的头部文件
+		this.responseType = responseType // 期望的返回值
+	}
+
+	// 发起request请求时，先查看实例里面有没有对应的实例属性
+	// 实例可设置的属性有 baseUrl, timeout, beforeSend
+	request ({
+		url, method = 'GET', data = {}, headers, timeout,
+		beforeSend, dataType, responseType
+	} = {}) {
+		const ret = this.getDataAndUrl(method, this.baseUrl + url, data, dataType) // 一个含有data url header的对象
+		url = ret.url
+		data = ret.data
+		headers = merge.call(ret.headers, headers ? headers : {}, this.headers)
+		beforeSend = beforeSend || this.beforeSend || function (next) { next() }
+		timeout = timeout || this.timeout || 18000
+		responseType = responseType || this.responseType || 'text'
+		let canContinue = false
+		beforeSend(() => canContinue = true )
+
+		if (!canContinue) return new Pro((resolve, reject) => reject('请求已被拦截'))
+
+		if (this._hasFetchApi) {																	// 如果存在fetch api则直接使用fetch api 发起请求				
+			return fetch(url, {
+				body: data, method, headers, cache: 'no-cache',
+				mode: 'cors', redirect: 'follow'
+			}).then(res => res.json())
+		}
+		
+		return new Pro((resolve, reject) => {
+			requestClient({
+				url, method, data, timeout,
+				failed (err) { return reject(err) },
+				success (res) { return resolve(res) },
+				responseType, headers
+			})
+		})
+	}
+
+	getDataAndUrl (method, url, data, dataType) {
+		const isHeadOrGet = this._isHeadOrGetReg.test(method)
+		const headers = {}
+		// 判断值类型
+		if (!dataType) {
+			const type = getType(data)
+			if (type === 'String') {
+				dataType = 'text'
+			} else if (type === 'Object') {
+				dataType = 'def'
+			} else if (type === 'FormData') {
+				dataType = 'form'
+			} else {
+				dataType = 'def'
+			}
+		}
+		
+		// 如果是 get 或者 head 方法请求
+		if (isHeadOrGet) {
+			const serializeData = serialize.call(data)
+			url = url + (serializeData ? '?' + serializeData : '')
+			data = null
+			headers['Content-Type'] = this._dataTypeTable['def']
+			return {
+				url, data, headers
+			}
+		}
+
+		if (dataType === 'def') {
+			data = serialize.call(data)
+			headers['Content-Type'] = this._dataTypeTable['def']
+		} else if (dataType === 'json') {
+			data = typeof data === 'object' ? JSON.stringify(data) : null
+			headers['Content-Type'] = this._dataTypeTable['json']
+		} else {
+			headers['Content-Type'] = this._dataTypeTable[dataType]
+		}
+
+		return {
+			url, data, headers
+		}
+	}
+}
+
+Request.prototype._hasFetchApi = window.fetch ? false : false 	// 判断当前环境是否有fetch方法
+Request.prototype._isHeadOrGetReg = /^(get|head)$/i  					// 判断请求方法是否是head或者get
+Request.prototype._dataTypeTable = {
 	json: 'application/json; charset=utf-8',
-	xml: 'application/x-www-form-urlencoded; charset=utf-8',
+	def: 'application/x-www-form-urlencoded; charset=utf-8',
 	text: 'text/plain; charset=utf-8',
   html: 'html/plain; charset=utf-8',
   form: 'multipart/form-data; charset=utf-8'
 }
 
-function createInstance (url, method, data, callback) {
-	
+const request = createClient(Request) // 使用默认值
+
+request.create = function (configs) {
+	return createClient(Request, configs)
 }
-
-// 创建一个基于XMLHttpRequest的请求客户端
-function requestClient ({
-	url, method = 'GET', data = {}, timeout = 18000, 
-	responseType = 'json', headers = {}, 
-	contentType = 'application/x-www-form-urlencoded; charset=utf-8',
-	success = function () {}, failed = function () {},
-	beforeSend = function (next) { next() },
-} = {}) {
-	const client = new XMLHttpRequest()
-	const reg = /^(get|head)$/i
-	const isNotGetOrHead = !reg.test(method)
-	const serializeData = serialize.call(data)
-
-	if (isNotGetOrHead) {
-		data = serializeData
-	} else {
-		url = url + '?' + serializeData
-		data = null
-	}
-
-	client.onreadystatechange = function () {
-		if (this.readyState !== 4) return false 	
-		if (this.status >= 400 && this.status < 600 ) {
-			return failed(this.status + this.statusText)
-		}
-		return success(this.response)
-	}
-
-	client.open(method, url, true)
-
-	client.timeout = timeout
-
-	client.ontimeout = function () {
-		failed(this.status + '连接超时')
-	}
-
-	let next = false
-	beforeSend(() => next = true)
-
-	next && client.send(data)
-}
-
-// 
-function createFetch () {
-	return fetch
-}
-
-class Request {
-
-	constructor () {
-		this.baseUrl = ''
-		this.timeout = 18000
-		this.hasFetchApi = window.fetch ? true : false
-		this._isHeadOrGetReg = /^(get|head)$/i
-	}
-
-	request ({
-		url, method, data
-	} = {}) {
-		const isHeadOrGet = this._isHeadOrGetReg(method)
-		if (this.hasFetchApi) {
-			return fetch(url, {
-				body,
-				method: method,
-				headers: merge.call(headers, {
-					'Content-Type': data_tactics[dataType]
-				}),
-				cache: 'no-cache',
-				mode: 'cors',
-				redirect: 'follow'
-			}).then(res => res.json())
-		}
-
-		return new Pro((resolve, reject) => {
-			requestClient({
-				url, method, data, beforeSend, timeout,
-				success (res) { return resolve(res) },
-				failed (err) { return reject(err) },
-				responseType = 'json', headers = {}, 
-				contentType = 'application/x-www-form-urlencoded; charset=utf-8'
-			})
-		})
-	}
-
-	get (url, data) {
-		return this.request({
-			method: 'get', url, data
-		})
-	}
-
-	post (url, data) {
-		return this.request({
-			method: 'POST', url, data
-		})
-	}
-
-	delete (url, data) {
-		return this.request({
-			method: 'DELETE', url, data
-		})
-	}
-
-	put (url, data) {
-		return this.request({
-			method: 'PUT', url, data
-		})
-	}
-
-	patch (url, data) {
-		return this.request({
-			method: 'PATCH', url, data
-		})
-	}
-}
-
-
-function request({ 
-  url = '', 
-  data = {}, 
-  headers = {}, 
-  dataType = 'xml', 
-  method = 'GET' 
-} = {}) {
-  method = method.toUpperCase()
-	if (self.fetch) {
-		const body = method === 'GET' || method === 'HEAD' ? null : JSON.stringify(data)
-		const init = {
-			body,
-			method: method,
-			headers: merge.call(headers, {
-				'Content-Type': data_tactics[dataType]
-			}),
-			cache: 'no-cache',
-			mode: 'cors',
-			redirect: 'follow'
-		}
-		return fetch(url, init).then((res) => res.json())
-	} else {
-    const SelfPro = self.Promise ? self.Promise : Pro
-    const promise = new SelfPro((resolve, reject) => {
-      const xhr = new XMLHttpRequest()
-      xhr.addEventListener('readystatechange', function() {
-        if (this.readyState !== 4) return false 
-        try {
-          resolve(JSON.parse(this.responseText))
-        } catch (err) {
-          reject(err ? err : this.responseText)
-        }
-      })
-      xhr.open(method, method === 'POST' ? url : url + '?' + serialize.call(data), true)
-      xhr.send(method === 'POST' ? serialize.call(data) : null)
-    })
-		return promise
-	}
-}
-
-request.get = function(url, data) {
-	return this({
-		url,
-		method: 'GET',
-		data
-	})
-}
-
-request.post = function(url, data) {
-	return this({
-		url,
-		method: 'POST',
-		data
-	})
-}
-
-request.key = 'request'
 
 export default request
