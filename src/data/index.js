@@ -1,6 +1,6 @@
 import { add, minus, set, toTree, quickSort } from "./array"
 
-import { serialize, dataReset, keys, values, merge } from "./object"
+import { serialize, dataReset, keys, values, merge, from } from "./object"
 
 import { json } from "./string"
 
@@ -108,6 +108,7 @@ wt.use(
   map,
   extend,
   copy,
+  from,
   keys,
   values
 )
@@ -133,6 +134,7 @@ export {
   map,
   extend,
   copy,
+  from,
   keys,
   values
 }
