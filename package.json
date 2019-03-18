@@ -16,12 +16,14 @@
     "jest": "^23.6.0",
     "webpack": "^4.28.2",
     "webpack-cli": "^3.1.2",
-    "webpack-dev-server": "^3.1.14"
+    "webpack-dev-server": "^3.1.14",
+    "websocket": "^1.0.28"
   },
   "scripts": {
     "test": "jest",
     "dev": "webpack-dev-server --config webpack.dev.js",
     "server": "node service/index.js",
+    "ws": "node service/websocket",
     "build:demo": "webpack --config webpack.demo.build.js"
   },
   "dependencies": {}
