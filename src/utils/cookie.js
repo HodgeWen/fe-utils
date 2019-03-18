@@ -38,6 +38,7 @@ class Cookie {
     each(args, arg => {
       document.cookie += arg + "=''; expires=" + expires
     })
+    this.hasInit = false
   }
 
 }
