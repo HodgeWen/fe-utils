@@ -42,7 +42,9 @@ pt.constructor = Selector
 pt.push = ap.push
 pt.splice = ap.splice
 pt.each = function(callback) {
-  for (let i = 0, len = this.length; i < len; i++) {
+  let i = -1
+  const len = this.length
+  while (i++ < len) {
     callback(this[i], i)
   }
 }
