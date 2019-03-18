@@ -169,7 +169,7 @@ class Request {
 	}
 }
 
-Request.prototype._hasFetchApi = window.fetch ? false : false 	// 判断当前环境是否有fetch方法
+Request.prototype._hasFetchApi = window.fetch ? true : false 	// 判断当前环境是否有fetch方法
 Request.prototype._isHeadOrGetReg = /^(get|head)$/i  					// 判断请求方法是否是head或者get
 Request.prototype._dataTypeTable = {
 	json: 'application/json; charset=utf-8',
