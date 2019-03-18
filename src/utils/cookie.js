@@ -7,6 +7,7 @@ class Cookie {
     // 未初始化状态
     this.hasInit = false
     this.cookie = null
+    this.types = Object.create(null) // 存储原格式
   }
 
   // 获取cookie
@@ -26,6 +27,7 @@ class Cookie {
       expires = '; expires=' + date.toUTCString()
     } 
     eachObj(conf, (val, key) => {
+      this.types[key] = getType[val]
       document.cookie = `${key}=${val}${expires}`
     })
     this.hasInit = false
@@ -34,8 +36,11 @@ class Cookie {
   // 删除cookie
   remove(...args) {
     let date = new Date()
+    date.setTime(+date - 1)
     let expires = date.toUTCString()
     each(args, arg => {
+      if (!this.types[arg]) return false
+      delete this.types[arg]
       document.cookie += arg + "=''; expires=" + expires
     })
     this.hasInit = false
