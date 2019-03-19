@@ -12,6 +12,13 @@ function map(fn) {
       .map(fn)
       .join("")
   }
+  if (type === 'Object') {
+    const ret = {}
+    eachObj(ctx, (val, key) => {
+      ret[key] = fn(val, key)
+    })
+    return ret
+  }
   return false
 }
 

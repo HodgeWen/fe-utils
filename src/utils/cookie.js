@@ -1,49 +1,45 @@
-import { json } from "../data"
 import { each, getType, eachObj } from "../common"
 
 class Cookie {
-
   constructor () {
-    // 未初始化状态
-    this.hasInit = false
-    this.cookie = null
-    this.types = Object.create(null) // 存储原格式
+    this.initialized = false
+    this.cookie = Object.create(null)
   }
 
-  // 获取cookie
-  get(key) {
-    if (this.hasInit) return key !== undefined ? this.cookie[key] : this.cookie
-    this.cookie = json.call(document.cookie, ";")
-    this.hasInit = true
-    return key !== undefined ? this.cookie[key] : this.cookie
+  _update (key, value, date, days) {
+    date.setTime(+date + 86400000 * days)
+    const expires = date.toUTCString()
+    days > 0 && (this.cookie[key] = value)
+    document.cookie = `${key}=${value}; expires=${expires}`
   }
 
-  // 设置cookie
-  set(conf, expiresDay = null) {
-    let expires = ''
-    if (getType(expiresDay) === 'Number') {
-      const date = new Date()
-      date.setTime(+date + 86400000 * expiresDay)
-      expires = '; expires=' + date.toUTCString()
-    } 
-    eachObj(conf, (val, key) => {
-      this.types[key] = getType[val]
-      document.cookie = `${key}=${val}${expires}`
-    })
-    this.hasInit = false
+  init () {
+    document.cookie.split(';').map(v => decodeURIComponent(v).trim().split('=')).forEach(v => this.cookie[v[0]] = !window.isNaN(+v[1]) ? +v[1] : v[1])
+    this.initialized = true
   }
 
-  // 删除cookie
-  remove(...args) {
-    let date = new Date()
-    date.setTime(+date - 1)
-    let expires = date.toUTCString()
+  get (key) {
+    !this.initialized && this.init()   // 先执行初始化操作
+    return getType(key) === 'Undefined' ? this.cookie : this.cookie[key]
+  }
+
+  set (...args) {
+    !this.initialized && this.init()   // 先执行初始化操作
+    const [first, second, third] = args
+    const isObject = getType(first) === 'Object'
+    const date = new Date()
+    const days = isObject ? (second || 30) : (third || 30)
+    isObject ? eachObj(first, (val, key) => this._update(key, val, date, days)) : this._update(first, second, date, days)
+  }
+
+  remove (...args) {
+    !this.initialized && this.init()   // 先执行初始化操作
+    const date = new Date()
     each(args, arg => {
-      if (!this.types[arg]) return false
-      delete this.types[arg]
-      document.cookie += arg + "=''; expires=" + expires
+      if (!this.cookie[arg]) return false
+      this._update(arg, '', date, -1)
+      delete this.cookie[arg]
     })
-    this.hasInit = false
   }
 
 }
