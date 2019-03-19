@@ -27,53 +27,35 @@ function off(type, handler) {
   return this
 }
 
-function click(handler, bubble = true) {
-  this.each(node => node.addEventListener("click", handler, bubble))
-  return this
+function createEvent (eventName) {
+  return function (handler, bubble = true) {
+    this.each(node => node.addEventListener(eventName, handler, bubble))
+    return this
+  }
 }
 
-function mouseenter(handler, bubble = true) {
-  this.each(node => node.addEventListener("mouseenter", handler, bubble))
-  return this
-}
 
-function mouseleave(handler, bubble = true) {
-  this.each(node => node.addEventListener("mouseleave", handler, bubble))
-  return this
-}
+const click = createEvent('click')
 
-function mousedown(handler, bubble = true) {
-  this.each(node => node.addEventListener("mousedown", handler, bubble))
-  return this
-}
+const mouseenter = createEvent('mouseenter')
 
-function mousemove(handler, bubble = true) {
-  this.each(node => node.addEventListener("mousemove", handler, bubble))
-  return this
-}
+const mouseleave = createEvent('mouseleave')
 
-function mouseup(handler, bubble = true) {
-  this.each(node => node.addEventListener("mouseup", handler, bubble))
-  return this
-}
+const mousedown = createEvent('mousedown')
 
-function scroll(handler, bubble = true) {
-  this.each(node => node.addEventListener("scroll", handler, bubble))
-  return this
-}
+const mousemove = createEvent('mousemove')
 
-function resize(handler, bubble = true) {
-  this.each(node => node.addEventListener("resize", handler, bubble))
-  return this
-}
+const mouseup = createEvent('mouseup')
 
-function keyup(handler, bubble = true) {
-  this.each(node => node.addEventListener("keyup", handler, bubble))
-}
+const scroll = createEvent('scroll')
 
-function keydown(handler, bubble = true) {
-  this.each(node => node.addEventListener("keydown", handler, bubble))
-}
+const resize = createEvent('resize')
+
+const keyup = createEvent('keyup')
+
+const keydown = createEvent('keydown')
+
+const change = createEvent('change')
 
 on.key = "on"
 off.key = "off"
@@ -87,6 +69,8 @@ scroll.key = "scroll"
 resize.key = "resize"
 keyup.key = 'keyup'
 keydown.key = 'keydown'
+change.key = 'change'
+
 
 export {
   on,
@@ -100,5 +84,6 @@ export {
   scroll,
   resize,
   keyup,
-  keydown
+  keydown,
+  change
 }

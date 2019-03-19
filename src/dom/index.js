@@ -18,7 +18,8 @@ import {
   scroll,
   resize,
   keyup,
-  keydown
+  keydown,
+  change
 } from "./event"
 
 import { css } from "./style"
@@ -44,7 +45,7 @@ pt.splice = ap.splice
 pt.each = function(callback) {
   let i = -1
   const len = this.length
-  while (i++ < len) {
+  while (++i < len) {
     callback(this[i], i)
   }
 }
@@ -60,11 +61,12 @@ function $(str) {
   return new Selector(str)
 }
 
-$.use = function(...funcs) {
-  for (let i = 0, len = funcs.length; i < len; i++) {
-    if (!pt[funcs[i].key]) {
-      pt[funcs[i].key] = funcs[i]
-    }
+$.use = function(...funs) {
+  let i = -1
+  const len = funs.length
+  while (++i < len) {
+    const eventName = funs[i].key
+    !pt[eventName] && (pt[eventName] = funs[i])
   }
 }
 
@@ -96,5 +98,6 @@ export {
   resize,
   keyup,
   keydown,
+  change,
   css
 }

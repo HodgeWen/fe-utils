@@ -24,6 +24,7 @@ import $, {
   resize,
   keyup,
   keydown,
+  change,
   css
 } from "./dom"
 
@@ -66,6 +67,7 @@ $.use(
   resize,
   keyup,
   keydown,
+  change,
   css
 )
 
