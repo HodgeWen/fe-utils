@@ -86,7 +86,7 @@ mouseup.key = "mouseup"
 scroll.key = "scroll"
 resize.key = "resize"
 keyup.key = 'keyup'
-keydown.keydown = 'keydown'
+keydown.key = 'keydown'
 
 export {
   on,
