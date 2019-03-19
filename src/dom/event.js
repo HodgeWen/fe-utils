@@ -28,10 +28,12 @@ function off(type, handler) {
 }
 
 function createEvent (eventName) {
-  return function (handler, bubble = true) {
+  function ret (handler, bubble = true) {
     this.each(node => node.addEventListener(eventName, handler, bubble))
     return this
   }
+  ret.key = eventName
+  return ret
 }
 
 
@@ -59,18 +61,6 @@ const change = createEvent('change')
 
 on.key = "on"
 off.key = "off"
-click.key = "click"
-mouseenter.key = "mouseenter"
-mouseleave.key = "mouseleave"
-mousedown.key = "mousedown"
-mousemove.key = "mousemove"
-mouseup.key = "mouseup"
-scroll.key = "scroll"
-resize.key = "resize"
-keyup.key = 'keyup'
-keydown.key = 'keydown'
-change.key = 'change'
-
 
 export {
   on,
