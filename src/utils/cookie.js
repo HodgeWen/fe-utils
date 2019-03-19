@@ -10,6 +10,9 @@ class Cookie {
     date.setTime(+date + 86400000 * days)
     const expires = date.toUTCString()
     days > 0 && (this.cookie[key] = value)
+    const type = getType(value)
+    const isObjOrArr = type === 'Object' || type === 'Array'
+    value = isObjOrArr ? encodeURIComponent(JSON.stringify(value)) : value
     document.cookie = `${key}=${value}; expires=${expires}`
   }
 
@@ -20,7 +23,10 @@ class Cookie {
 
   get (key) {
     !this.initialized && this.init()   // 先执行初始化操作
-    return getType(key) === 'Undefined' ? this.cookie : this.cookie[key]
+    const value = key ? this.cookie[key] : this.cookie
+    const type = getType(value)
+    const isObjOrArr = type === 'Object' || type === 'Array'
+    return isObjOrArr ? value : JSON.parse(value)
   }
 
   set (...args) {
