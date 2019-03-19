@@ -7,14 +7,14 @@ function find(qs) {
 }
 
 function eq(index) {
-  const target = this[index]
   this.splice(0)
-  this.push(target)
+  this.push(this[index])
   return this
 }
 
-function not(sn) {
-  
+function not(index) {
+  this.splice(index, 1)
+  return this
 }
 
 find.key = "find"
