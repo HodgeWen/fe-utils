@@ -1,4 +1,4 @@
-function on(eventType, child, handler, bubble = true) {
+function on(eventType, child, handler, bubble = false) {
   const firstCharacter = child.slice(0, 1)
   let key = "tagName"
   if (firstCharacter === "#") {
@@ -28,7 +28,7 @@ function off(type, handler) {
 }
 
 function createEvent (eventName) {
-  function ret (handler, bubble = true) {
+  function ret (handler, bubble = false) {
     this.each(node => node.addEventListener(eventName, handler, bubble))
     return this
   }
