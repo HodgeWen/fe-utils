@@ -46,7 +46,7 @@ function set(id) {
   return arr
 }
 
-function binarySearch(value) {
+function binarySearch(...args) {
   const ctx = getCtx(this)
   let start = 0
   let end = ctx.length - 1
@@ -54,18 +54,34 @@ function binarySearch(value) {
     return parseInt((start + end) / 2)
   }
   let midIndex = getMid()
+
+  let [value, key] = args
+  if (key === undefined) {
+    while (start <= end) {
+      if (value > ctx[midIndex] ) {
+        start = midIndex + 1
+        midIndex = getMid()
+      } else if (value < ctx[midIndex]) {
+        end = midIndex - 1
+        midIndex = getMid()
+      } else {
+        return midIndex
+      }
+    }
+    return -1
+  }
   while (start <= end) {
-    if (value > ctx[midIndex] ) {
-      start = midIndex
+    if (value > ctx[midIndex][key] ) {
+      start = midIndex + 1
       midIndex = getMid()
-    } else if (value < ctx[midIndex]) {
-      end = midIndex
+    } else if (value < ctx[midIndex][key]) {
+      end = midIndex - 1
       midIndex = getMid()
     } else {
-      start = midIndex
       return midIndex
     }
   }
+  return -1
 }
 
 function toTree() {
