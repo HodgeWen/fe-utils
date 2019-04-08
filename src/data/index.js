@@ -1,4 +1,4 @@
-import { add, minus, set, toTree, quickSort } from "./array"
+import { add, minus, set, toTree, quickSort, binarySearch } from "./array"
 
 import { serialize, dataReset, keys, values, merge, from } from "./object"
 
@@ -95,6 +95,7 @@ wt.use(
   set,
   toTree,
   quickSort,
+  binarySearch,
   serialize,
   merge,
   json,
@@ -121,6 +122,7 @@ export {
   set,
   toTree,
   quickSort,
+  binarySearch,
   serialize,
   merge,
   json,

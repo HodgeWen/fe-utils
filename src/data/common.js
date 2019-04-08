@@ -55,7 +55,6 @@ function deepCopy() {
   if (type === 'Object') {
     ret = {}
   }
-
 }
 
 map.key = 'map'

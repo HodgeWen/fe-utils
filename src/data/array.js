@@ -46,6 +46,28 @@ function set(id) {
   return arr
 }
 
+function binarySearch(value) {
+  const ctx = getCtx(this)
+  let start = 0
+  let end = ctx.length - 1
+  function getMid () {
+    return parseInt((start + end) / 2)
+  }
+  let midIndex = getMid()
+  while (start <= end) {
+    if (value > ctx[midIndex] ) {
+      start = midIndex
+      midIndex = getMid()
+    } else if (value < ctx[midIndex]) {
+      end = midIndex
+      midIndex = getMid()
+    } else {
+      start = midIndex
+      return midIndex
+    }
+  }
+}
+
 function toTree() {
 
 }
@@ -59,5 +81,6 @@ minus.key = 'minus'
 set.key = 'set'
 toTree.key = 'toTree'
 quickSort.key = 'quickSort'
+binarySearch.key = 'binarySearch'
 
-export { add, minus, set, toTree, quickSort }
+export { add, minus, set, toTree, quickSort, binarySearch }

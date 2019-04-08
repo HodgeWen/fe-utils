@@ -6,7 +6,7 @@ const FriendlyErrorsWebpackPlugin = require('friendly-errors-webpack-plugin')
 const ip_v4 = require('internal-ip').v4.sync()
 require('colors')
 const host = '0.0.0.0'
-const port = 3000
+const port = 8000
 
 const messages = [
   '你的应用正在运行中...'.grey,
