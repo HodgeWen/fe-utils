@@ -10,16 +10,23 @@ export default class WStore {
   }
 
   get(key) {
-    const reg = /^[\[\{].*[\}\]]$/
     if (key === undefined) {
       const ret = {}
       eachObj(this.storage, (val, key) => {
-        ret[key] = reg.test(val) ? JSON.parse(val) : val
+        try {
+          ret[key] = JSON.parse(val)
+        } catch {
+          ret[key] = val
+        }
       })
       return ret
     }
     const value = this.storage.getItem(key)
-    return reg.test(value) ? JSON.parse(value) : value
+    try {
+      return JSON.parse(value)
+    } catch {
+      return value
+    }
   }
 
   set(...args) {
