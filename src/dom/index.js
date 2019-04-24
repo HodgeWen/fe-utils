@@ -1,29 +1,3 @@
-import { find, eq, not } from "./selector"
-
-import { hasClass, addClass, removeClass, toggleClass } from "./class"
-
-import { attr, prop, val, html, text } from "./attribute"
-
-import { append } from "./element"
-
-import {
-  on,
-  off,
-  click,
-  mouseenter,
-  mouseleave,
-  mousedown,
-  mousemove,
-  mouseup,
-  scroll,
-  resize,
-  keyup,
-  keydown,
-  change
-} from "./event"
-
-import { css } from "./style"
-
 function Selector(str) {
   this.length = 0
   if (typeof str === "string") {
@@ -72,20 +46,15 @@ $.use = function(...funs) {
 
 export default $
 
+export { find, eq, not } from "./selector"
+
+export { hasClass, addClass, removeClass, toggleClass } from "./class"
+
+export { attr, prop, val, html, text } from "./attribute"
+
+export { append } from "./element"
+
 export {
-  find,
-  eq,
-  not,
-  hasClass,
-  addClass,
-  removeClass,
-  toggleClass,
-  attr,
-  prop,
-  val,
-  html,
-  text,
-  append,
   on,
   off,
   click,
@@ -98,6 +67,8 @@ export {
   resize,
   keyup,
   keydown,
-  change,
-  css
-}
+  change
+} from "./event"
+
+export { css } from "./style"
+

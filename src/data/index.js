@@ -1,14 +1,4 @@
-import { add, minus, set, toTree, quickSort, binarySearch } from "./array"
-
-import { serialize, dataReset, keys, values, merge, from } from "./object"
-
-import { json } from "./string"
-
 import { getType, each } from "../common"
-
-import { isArr, isObj, isFunc, isStr, isNum, isBoo } from "./types"
-
-import { map, extend, copy } from "./common"
 
 function DWrap(any) {
   this.data = any
@@ -91,27 +81,12 @@ wt.use = function(...funcs) {
 
 export default wt
 
-export {
-  add,
-  minus,
-  set,
-  toTree,
-  quickSort,
-  binarySearch,
-  serialize,
-  merge,
-  json,
-  isArr,
-  isObj,
-  isFunc,
-  isStr,
-  isNum,
-  isBoo,
-  dataReset,
-  map,
-  extend,
-  copy,
-  from,
-  keys,
-  values
-}
+export { add, minus, set, toTree, quickSort, binarySearch } from "./array"
+
+export { serialize, dataReset, keys, values, merge, from } from "./object"
+
+export { json } from "./string"
+
+export { isArr, isObj, isFunc, isStr, isNum, isBoo } from "./types"
+
+export { map, extend, copy } from "./common"
