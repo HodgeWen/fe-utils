@@ -26,20 +26,57 @@ import $, {
   keydown,
   change,
   css
-} from "./dom"
+} from './dom'
 
-import wt from "./data"
+import wt, {
+  add,
+  minus,
+  set,
+  toTree,
+  quickSort,
+  binarySearch,
+  serialize,
+  merge,
+  json,
+  isArr,
+  isObj,
+  isFunc,
+  isStr,
+  isNum,
+  isBoo,
+  dataReset,
+  map,
+  extend,
+  copy,
+  from,
+  keys,
+  values
+} from './data'
 
-import { cookie, url, dateFormat, WStore, Pro, request } from "./utils"
-
-const utils = {
-  cookie,
-  url,
-  dateFormat,
-  WStore,
-  Pro,
-  request
-}
+wt.use(
+  add,
+  minus,
+  set,
+  toTree,
+  quickSort,
+  binarySearch,
+  serialize,
+  merge,
+  json,
+  isArr,
+  isObj,
+  isFunc,
+  isStr,
+  isNum,
+  isBoo,
+  dataReset,
+  map,
+  extend,
+  copy,
+  from,
+  keys,
+  values
+)
 
 $.use(
   find,
@@ -71,5 +108,6 @@ $.use(
   css
 )
 
+import * as utils from './utils'
 
 export { $, wt, utils }

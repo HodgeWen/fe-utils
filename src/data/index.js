@@ -89,31 +89,6 @@ wt.use = function(...funcs) {
   })
 }
 
-wt.use(
-  add,
-  minus,
-  set,
-  toTree,
-  quickSort,
-  binarySearch,
-  serialize,
-  merge,
-  json,
-  isArr,
-  isObj,
-  isFunc,
-  isStr,
-  isNum,
-  isBoo,
-  dataReset,
-  map,
-  extend,
-  copy,
-  from,
-  keys,
-  values
-)
-
 export default wt
 
 export {
