@@ -49,4 +49,21 @@ import {wt, $, utils} from "../src"
   //     ]
   //   }
   // ]
+
+  const canvas = $('#cvs')[0]
+  const context = canvas.getContext('2d')
+  canvas.width = 400
+  canvas.height = 400
+  $('#upload').change(function(e) {
+    const file = e.target.files[0]
+    const img = new Image()
+    img.src = URL.createObjectURL(file)
+   
+   
+    img.onload = function () {
+      console.dir(canvas)
+      context.drawImage(img, 0, 0, 400, 400)
+    }
+   
+  })
 }(window)
