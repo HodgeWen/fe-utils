@@ -1,4 +1,4 @@
-function find(qs) {
+export function find(qs) {
   this.splice(0)
   this.selector = this.selector + ' ' + qs
   const nodeList = document.querySelectorAll(this.selector)
@@ -6,19 +6,13 @@ function find(qs) {
   return this
 }
 
-function eq(index) {
+export function eq(index) {
   this.splice(0)
   this.push(this[index])
   return this
 }
 
-function not(index) {
+export function not(index) {
   this.splice(index, 1)
   return this
 }
-
-find.key = "find"
-eq.key = "eq"
-not.key = "not"
-
-export { find, eq, not }

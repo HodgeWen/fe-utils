@@ -14,11 +14,11 @@ function _remove (node, className) {
   }
 }
 
-function hasClass(className) {
+export function hasClass(className) {
 	return this.env ? this[0].classList.contains(className) : _has(this[0], className)
 }
 
-function addClass(className) {
+export function addClass(className) {
 	if (!this.env) {
 		this.each((node) => _add(node, className))
 	} else {
@@ -27,7 +27,7 @@ function addClass(className) {
 	return this
 }
 
-function removeClass(className) {
+export function removeClass(className) {
 	if (!this.env) {
 		this.each((node) => _remove(node, className))
 	} else {
@@ -36,7 +36,7 @@ function removeClass(className) {
 	return this
 }
 
-function toggleClass(className) {
+export function toggleClass(className) {
   if (!this.env) {
     this.each(node => {
       _has(node, className) ? _remove(node, className) : _add(node, className)
@@ -46,10 +46,3 @@ function toggleClass(className) {
   }
   return this
 }
-
-hasClass.key = 'hasClass'
-addClass.key = 'addClass'
-removeClass.key = 'removeClass'
-toggleClass.key = 'toggleClass'
-
-export { hasClass, addClass, removeClass, toggleClass }

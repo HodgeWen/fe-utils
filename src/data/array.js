@@ -1,6 +1,6 @@
 import { each, getCtx, getType } from '../common'
 
-function add(...args) {
+export function add(...args) {
   let ctx = getCtx(this)
   let i = -1, len = args.length
   if (len < 1) return ctx 
@@ -13,11 +13,11 @@ function add(...args) {
   return ctx.concat(ret)
 }
 
-function minus(arr) {
+export function minus(arr) {
   const ctx = getCtx(this)
 }
 
-function set(id) {
+export function set(id) {
   const ctx = getCtx(this)
 
   if (Array.from && id === undefined) {
@@ -46,7 +46,7 @@ function set(id) {
   return arr
 }
 
-function binarySearch(...args) {
+export function binarySearch(...args) {
   const ctx = getCtx(this)
   let start = 0
   let end = ctx.length - 1
@@ -84,19 +84,10 @@ function binarySearch(...args) {
   return -1
 }
 
-function toTree() {
+export function toTree() {
 
 }
 
-function quickSort() {
+export function quickSort() {
 
 }
-
-add.key = 'add'
-minus.key = 'minus'
-set.key = 'set'
-toTree.key = 'toTree'
-quickSort.key = 'quickSort'
-binarySearch.key = 'binarySearch'
-
-export { add, minus, set, toTree, quickSort, binarySearch }

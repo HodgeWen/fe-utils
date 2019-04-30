@@ -1,4 +1,4 @@
-import { getType, each } from "../common"
+import { getType, each, eachObj } from "../common"
 
 function DWrap(any) {
   this.data = any
@@ -70,12 +70,9 @@ function wt(any) {
   return new DWrap(any)
 }
 
-wt.use = function(...funcs) {
-  each(funcs, fn => {
-    const key = fn.key
-    if (!pt[key]) {
-      pt[key] = fn
-    }
+wt.use = function(funcs) {
+  eachObj(funcs, (v, k) => {
+    pt[k] = v
   })
 }
 
@@ -85,7 +82,7 @@ export { add, minus, set, toTree, quickSort, binarySearch } from "./array"
 
 export { serialize, dataReset, keys, values, merge, from } from "./object"
 
-export { json } from "./string"
+export { json, repeat, replace } from "./string"
 
 export { isArr, isObj, isFunc, isStr, isNum, isBoo } from "./types"
 

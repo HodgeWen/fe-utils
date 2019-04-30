@@ -1,6 +1,6 @@
 import { getType, each, eachObj, getCtx } from "../common"
 
-function map(fn) {
+export function map(fn) {
   const ctx = getCtx(this)
   const type = getType(ctx)
   if (type === "Array") {
@@ -22,7 +22,7 @@ function map(fn) {
   return false
 }
 
-function extend(sup) {
+export function extend(sup) {
   const ctx = getCtx(this)
   const proto = Object.create(sup.prototype)
   proto.constructor = ctx
@@ -30,7 +30,7 @@ function extend(sup) {
   return ctx
 }
 
-function copy() {
+export function copy() {
   const ctx = getCtx(this)
   const type = getType(ctx)
   if (type !== 'Object' && type !== 'Array') return ctx
@@ -56,9 +56,3 @@ function deepCopy() {
     ret = {}
   }
 }
-
-map.key = 'map'
-extend.key = 'extend'
-copy.key = 'copy'
-
-export { map, extend, copy }

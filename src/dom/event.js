@@ -1,4 +1,4 @@
-function on(eventType, child, handler, bubble = false) {
+export function on(eventType, child, handler, bubble = false) {
   const firstCharacter = child.slice(0, 1)
   let key = "tagName"
   if (firstCharacter === "#") {
@@ -22,12 +22,12 @@ function on(eventType, child, handler, bubble = false) {
   return this
 }
 
-function off(type, handler) {
+export function off(type, handler) {
   this.each(node => node.removeEvent(type, handler))
   return this
 }
 
-function createEvent (eventName) {
+export function createEvent (eventName) {
   function ret (handler, bubble = false) {
     this.each(node => node.addEventListener(eventName, handler, bubble))
     return this
@@ -36,44 +36,24 @@ function createEvent (eventName) {
   return ret
 }
 
+export const click = createEvent('click')
 
-const click = createEvent('click')
+export const mouseenter = createEvent('mouseenter')
 
-const mouseenter = createEvent('mouseenter')
+export const mouseleave = createEvent('mouseleave')
 
-const mouseleave = createEvent('mouseleave')
+export const mousedown = createEvent('mousedown')
 
-const mousedown = createEvent('mousedown')
+export const mousemove = createEvent('mousemove')
 
-const mousemove = createEvent('mousemove')
+export const mouseup = createEvent('mouseup')
 
-const mouseup = createEvent('mouseup')
+export const scroll = createEvent('scroll')
 
-const scroll = createEvent('scroll')
+export const resize = createEvent('resize')
 
-const resize = createEvent('resize')
+export const keyup = createEvent('keyup')
 
-const keyup = createEvent('keyup')
+export const keydown = createEvent('keydown')
 
-const keydown = createEvent('keydown')
-
-const change = createEvent('change')
-
-on.key = "on"
-off.key = "off"
-
-export {
-  on,
-  off,
-  click,
-  mouseenter,
-  mouseleave,
-  mousedown,
-  mousemove,
-  mouseup,
-  scroll,
-  resize,
-  keyup,
-  keydown,
-  change
-}
+export const change = createEvent('change')

@@ -1,6 +1,6 @@
 import { getType } from "../common"
 
-function attr(...params) {
+export function attr(...params) {
   const param1 = params[0]
   const param2 = params[1]
   const type = getType(param1)
@@ -25,7 +25,7 @@ function attr(...params) {
   return this
 }
 
-function prop(...params) {
+export function prop(...params) {
   const param1 = params[0]
   const param2 = params[1]
   if (param2) {
@@ -35,7 +35,7 @@ function prop(...params) {
   return this[0][param1]
 }
 
-function val(value) {
+export function val(value) {
   if (value !== undefined) {
     this.each(node => {
       node.value = value
@@ -45,7 +45,7 @@ function val(value) {
   return this[0].value
 }
 
-function html(value) {
+export function html(value) {
   if (value !== undefined) {
     this.each(node => {
       node.innerHTML = value
@@ -55,7 +55,7 @@ function html(value) {
   return this[0].innerHTML
 }
 
-function text(value) {
+export function text(value) {
   if (value !== undefined) {
     this.each(node => {
       node.innerText = value
@@ -64,11 +64,3 @@ function text(value) {
   }
   return this[0].innerText
 }
-
-attr.key = "attr"
-prop.key = "prop"
-val.key = "val"
-html.key = "html"
-text.key = "text"
-
-export { attr, prop, val, html, text }

@@ -1,6 +1,6 @@
 import { each, eachObj, getType, getCtx } from "../common"
 
-function serialize(separator = "&") {
+export function serialize(separator = "&") {
   let ret = ""
   const ctx = getCtx(this)
   eachObj(ctx, (val, key) => {
@@ -13,7 +13,7 @@ function serialize(separator = "&") {
   return ret.slice(0, -1)
 }
 
-function dataReset() {
+export function dataReset() {
   const ret = {}
   const ctx = getCtx(this)
   const table = {
@@ -28,12 +28,12 @@ function dataReset() {
   return ret
 }
 
-function keys() {
+export function keys() {
   const ctx = getCtx(this)
   return Object.keys(ctx)
 }
 
-function values() {
+export function values() {
   const ctx = getCtx(this)
   if (!Object.values) {
     const arr = []
@@ -43,7 +43,7 @@ function values() {
   return Object.values(ctx)
 }
 
-function merge(...args) {
+export function merge(...args) {
   const ctx = getCtx(this)
   const ret = {}
   eachObj(ctx, (val, key) => {
@@ -60,7 +60,7 @@ function merge(...args) {
   return ret
 }
 
-function from(obj) {
+export function from(obj) {
   const ctx = getCtx(this)
   const ret = {}
   eachObj(ctx, (val, key) => {
@@ -71,12 +71,3 @@ function from(obj) {
   })
   return ret
 }
-
-serialize.key = "serialize"
-dataReset.key = "dataReset"
-keys.key = "keys"
-values.key = "values"
-merge.key = "merge"
-from.key = 'from'
-
-export { serialize, dataReset, keys, values, merge, from }

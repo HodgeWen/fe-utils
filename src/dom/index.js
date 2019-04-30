@@ -1,6 +1,8 @@
+import { eachObj } from '../common'
+
 function Selector(str) {
   this.length = 0
-  if (typeof str === "string") {
+  if (typeof str === 'string') {
     this.selector = str
     const nodeList = document.querySelectorAll(str)
     this.push.apply(this, nodeList)
@@ -24,9 +26,9 @@ pt.each = function(callback) {
   }
 }
 
-pt.env = (function () {
+pt.env = (function() {
   const ua = navigator.userAgent.toLowerCase()
-  const isLtIe11 = ua.match(/msie\s[\d\.]+/) 
+  const isLtIe11 = ua.match(/msie\s[\d\.]+/)
   const isGtIe10 = isLtIe11 && +isLtIe11[0].split(' ')[1] >= 10
   return !isLtIe11 || isGtIe10
 })()
@@ -35,24 +37,21 @@ function $(str) {
   return new Selector(str)
 }
 
-$.use = function(...funs) {
-  let i = -1
-  const len = funs.length
-  while (++i < len) {
-    const eventName = funs[i].key
-    !pt[eventName] && (pt[eventName] = funs[i])
-  }
+$.use = function(funs) {
+  eachObj(funs, (v, k) => {
+    pt[k] = v
+  })
 }
 
 export default $
 
-export { find, eq, not } from "./selector"
+export { find, eq, not } from './selector'
 
-export { hasClass, addClass, removeClass, toggleClass } from "./class"
+export { hasClass, addClass, removeClass, toggleClass } from './class'
 
-export { attr, prop, val, html, text } from "./attribute"
+export { attr, prop, val, html, text } from './attribute'
 
-export { append } from "./element"
+export { append } from './element'
 
 export {
   on,
@@ -68,7 +67,6 @@ export {
   keyup,
   keydown,
   change
-} from "./event"
+} from './event'
 
-export { css } from "./style"
-
+export { css } from './style'
