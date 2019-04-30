@@ -7,7 +7,7 @@ export function isObj() {
 }
 
 export function isFunc() {
-  return this.type === "export Function"
+  return this.type === "Function"
 }
 
 export function isStr() {
