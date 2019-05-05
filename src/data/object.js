@@ -4,10 +4,8 @@ export function serialize(separator = "&") {
   let ret = ""
   const ctx = getCtx(this)
   eachObj(ctx, (val, key) => {
-    const g =
-      val && typeof val === "object"
-        ? `${key}=${JSON.stringify(val) + separator}`
-        : `${key}=${encodeURIComponent(val) + separator}`
+    const value = val && typeof val === "object" ? JSON.stringify(val) : val
+    const g = `${encodeURIComponent(key)}=${encodeURIComponent(value) + separator}`
     ret += g
   })
   return ret.slice(0, -1)
@@ -30,6 +28,12 @@ export function dataReset() {
 
 export function keys() {
   const ctx = getCtx(this)
+  if (!Object.keys) {
+    const type = getType(ctx)
+    const arr = []
+    type === 'Object' ? eachObj(ctx, v => arr.push(v)) : each(ctx, (_, i) => arr.push(i + ''))
+    return arr
+  }
   return Object.keys(ctx)
 }
 

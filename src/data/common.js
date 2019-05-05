@@ -24,7 +24,7 @@ export function map(fn) {
 
 export function extend(sup) {
   const ctx = getCtx(this)
-  const proto = Object.create(sup.prototype)
+  const proto = Object.create(sup)
   proto.constructor = ctx
   ctx.prototype = proto
   return ctx
