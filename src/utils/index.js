@@ -10,4 +10,4 @@ import Pro from './promise'
 
 import request from './request'
 
-export { cookie, url, date, WStore, Pro, request }
+export { cookie, url, date, WStore }

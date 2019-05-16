@@ -1,3 +1,28 @@
+// 接口规范 可以
+guild({
+	xxx,
+	xxx,
+	xxx,
+	xxx,
+})
+guild.get()
+guild.patch()
+guild.put()
+guild.post()
+guild.delete()
+guild.create()
+
+// 实例方法
+inst.get()
+inst.patch()
+inst.put()
+inst.post()
+inst.delete()
+inst.use()
+
+
+
+
 import Ps from './promise'
 import { merge, serialize } from '../data'
 import { each, eachObj, getType } from '../common'
