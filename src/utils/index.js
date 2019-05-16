@@ -6,8 +6,8 @@ import * as date from "./date"
 
 import WStore from "./storage"
 
-import Pro from './promise'
+import BlackBox from './promise'
 
 import request from './request'
 
-export { cookie, url, date, WStore }
+export { cookie, url, date, WStore, BlackBox }
