@@ -32,7 +32,9 @@ export default class BlackBox {
       this.value = value
       this.status = 'resolved'
       if (!this.thenMethod) return
-      this.value = this.thenMethod(this.value)
+      this.queue.forEach(item => this.value = item(this.value))
+      this.queue = null 
+      delete this.queue
     }
 
     const reject = value => {
@@ -40,6 +42,8 @@ export default class BlackBox {
       this.status = 'rejected'
       if (!this.cacthErr) throw this.value
       this.value = this.cacthErr(this.value)
+      this.cacthErr = null
+      delete this.cacthErr
     }
 
     fn(resolve, reject)
@@ -50,18 +54,16 @@ export default class BlackBox {
       this.queue.push(onResolved)
       this.cacthErr = onRejected
     }
-    this.value = this.status === 'resolved' ? onResolved(this.value) : onRejected(this.value)
+    this.value = (this.status === 'resolved' ? onResolved(this.value) : onRejected(this.value))
     return this
   }
 
   catch(onCatched) {
     if (this.status === 'pending') {
+      this.cacthErr = onCatched
     }
-    return this.status === 'resolved'
-      ? this
-      : new this.constructor((resolve, reject) => {
-          resolve(onCatched(this.value))
-        })
+    this.status === 'rejected' && (this.value = onCatched(this.value))
+    return this
   }
 
   static resolve(val) {
