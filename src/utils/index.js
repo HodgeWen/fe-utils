@@ -8,6 +8,6 @@ import WStore from "./storage"
 
 import BlackBox from './promise'
 
-import request from './request'
+import guild from './request'
 
-export { cookie, url, date, WStore, BlackBox }
+export { cookie, url, date, WStore, BlackBox, guild }
