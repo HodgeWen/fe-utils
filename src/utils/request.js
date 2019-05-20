@@ -1,4 +1,4 @@
-import { serialize } from '../data'
+import { merge, serialize } from '../data'
 import { each, eachObj, getType } from '../common'
 
 // function reqFetch({
@@ -27,27 +27,31 @@ function reqXhr({
   withCredentials = false,
   headers = {}
 } = {}) {
+  // 请求之前的钩子
   this.beforeRequest(data)
   // 进行一些初始化工作
+  const isFormData = getType(data) === 'FormData'
   const xhr = new XMLHttpRequest() // xhr对象
-  method = method.toUpperCase() // 方法转为大写
-  const isHeadOrGet = method === 'HEAD' || method === 'GET' // 是否是GET或POST请求
-  url = this.baseUrl + (isHeadOrGet ? `${url}?${serialize.call(data)}` : url) // url最终的形态
-  data = isHeadOrGet ? null : data // data的最终形态
-  getType(data) === 'FormData' && delete headers['Content-Type']
+  const serializeData = serialize.call(data)
+  headers = merge.call(headers, this.headers) // 请求头部配置
+  method = method.toUpperCase() // 请求方法
+  const isHeadOrGet = method === 'HEAD' || method === 'GET' // 是否是GET或HEAD请求
+  isFormData && delete headers['Content-Type'] // 是formdata则自动设置contentType
+
+  url = this.baseUrl + (isHeadOrGet && !isFormData ? `${url}?${serializeData}` : url) // url最终的形态
+  data = isHeadOrGet ? null : isFormData ? data : serializeData // data的最终形态
 
   return new Promise((resolve, reject) => {
     xhr.open(method, url, true)
     xhr.timeout = timeout || this.timeout
     xhr.withCredentials = withCredentials || this.withCredentials
-    eachObj(headers || this.headers, (val, key) => {
+    eachObj(headers, (val, key) => {
       xhr.setRequestHeader(key, val)
     })
 
-    const afterResponse = this.afterResponse
     xhr.onreadystatechange = function() {
       if (this.readyState !== 4) return false
-      afterResponse()
+      
       if (this.status >= 400 && this.status < 600) {
         return reject(this.status + ': ' + this.statusText)
       }
@@ -76,7 +80,9 @@ class Guild {
     timeout = 0,
     beforeRequest = () => {},
     afterResponse = () => {},
-    headers = {},
+    headers = {
+      'Content-Type': 'application/x-www-form-urlencoded'
+    },
     withCredentials = false
   } = {}) {
     this.baseUrl = baseUrl
