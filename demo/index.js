@@ -1,4 +1,4 @@
-import {wt, $, utils} from "../src"
+import {wt, $, utils} from ".."
 
 // import $, { val, hasClass } from '../src/dom' 
 // import wt, {json, serialize, dataReset, map, values, set, add} from '../src/data'
