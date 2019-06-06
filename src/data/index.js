@@ -52,15 +52,17 @@ pt.each = function(handle) {
   return fun ? fun(data, handle) : false
 }
 
+pt.pipeMap = {
+  String: (ctx, string) => ctx[string](),
+  Function: (ctx, fn) => fn(ctx),
+  Array: (ctx, arr) => ctx[arr[0]](...arr.slice(1))
+}
 
+// 组合
 pt.pipe = function (...args) {
-  const ctx = this
-  const map = {
-    String: arg => ctx[arg](),
-    Function: arg => arg(ctx)
-  }
+  const map = this.pipeMap
   each(args, arg => {
-    this.data = map[getType(arg)](arg)
+    this.data = map[getType(arg)](this, arg)
     this.type = getType(this.data)
   })
   return this.data

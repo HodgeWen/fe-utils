@@ -2,11 +2,11 @@ import { each, getCtx, getType } from '../common'
 
 export function add(...args) {
   let ctx = getCtx(this)
-  let i = -1, len = args.length
+  let len = args.length
   if (len < 1) return ctx 
 
-  let ret = []
-
+  let ret = [], i = -1
+  
   while (++i < len) {
     getType(args[i]) !== "Array" ? ret.push(args[i]) : ret = ret.concat(args[i])
   }
@@ -15,6 +15,7 @@ export function add(...args) {
 
 export function minus(arr) {
   const ctx = getCtx(this)
+  ctx
 }
 
 export function set(id) {
