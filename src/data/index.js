@@ -80,12 +80,12 @@ wt.use = function(funcs) {
 
 export default wt
 
-export { add, minus, set, toTree, quickSort, binarySearch } from "./array"
+export * from "./array"
 
-export { serialize, dataReset, keys, values, merge, from } from "./object"
+export * from "./object"
 
-export { json, repeat, replace } from "./string"
+export * from "./string"
 
-export { isArr, isObj, isFunc, isStr, isNum, isBoo } from "./types"
+export * from "./types"
 
-export { map, extend, copy } from "./common"
+export * from "./common"

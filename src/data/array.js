@@ -13,9 +13,31 @@ export function add(...args) {
   return ctx.concat(ret)
 }
 
-export function minus(arr) {
+export function has(query) {
   const ctx = getCtx(this)
-  ctx
+  const len = ctx.length
+  if (query === undefined) return len > 0
+  const type = getType(query)
+  if (type !== 'Object' && type !== 'Array') {
+    let i = -1
+    while (++i < len) {
+      if (query === ctx[i]) return true
+    }
+    return false
+  }
+  let i = -1
+  while (++i < len) {
+    let isMatched = true
+    for (const key in query) {
+      if (ctx[i][key] !== query[key]) {
+        isMatched = false
+        continue
+      }
+    }
+    if (isMatched) return true
+  }
+  return false
+
 }
 
 export function set(id) {
@@ -83,12 +105,4 @@ export function binarySearch(...args) {
     }
   }
   return -1
-}
-
-export function toTree() {
-
-}
-
-export function quickSort() {
-
 }
