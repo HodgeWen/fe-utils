@@ -13,7 +13,7 @@ export function add(...args) {
   return ctx.concat(ret)
 }
 
-export function has(query) {
+export function findIndex(query) {
   const ctx = getCtx(this)
   const len = ctx.length
   if (query === undefined) return len > 0
@@ -21,9 +21,9 @@ export function has(query) {
   if (type !== 'Object' && type !== 'Array') {
     let i = -1
     while (++i < len) {
-      if (query === ctx[i]) return true
+      if (query === ctx[i]) return i
     }
-    return false
+    return -1
   }
   let i = -1
   while (++i < len) {
@@ -34,10 +34,14 @@ export function has(query) {
         continue
       }
     }
-    if (isMatched) return true
+    if (isMatched) return i
   }
-  return false
+  return -1
+}
 
+export function has(query) {
+  const ctx = getCtx(this)
+  return findIndex.call(ctx, query) !== -1
 }
 
 export function set(id) {
