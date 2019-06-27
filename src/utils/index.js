@@ -10,4 +10,6 @@ import BlackBox from './promise'
 
 import guild from './request'
 
-export { cookie, url, date, WStore, BlackBox, guild }
+import cache from './cache'
+
+export { cookie, url, date, WStore, BlackBox, guild, cache }
