@@ -1,13 +1,7 @@
-import {wt, $, utils} from ".."
+import { wt, $, utils } from "../tsrc"
 
-// import $, { val, hasClass } from '../src/dom' 
-// import wt, {json, serialize, dataReset, map, values, set, add} from '../src/data'
-// import * as utils from '../src/utils'
-// $.use({val, hasClass})
-// wt.use({json, serialize, dataReset, map, values, set, add})
-
-~function(ctx) {
+~(function(ctx) {
   ctx.$ = $
-  ctx.wt = wt 
+  ctx.wt = wt
   ctx.utils = utils
-}(window)
+})(window)
