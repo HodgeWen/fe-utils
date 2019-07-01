@@ -1,11 +1,11 @@
 import $, * as domFuns from './dom'
 
-import wt, * as wtFuns from './data'
+// import wt, * as wtFuns from './data'
 
-wt.use(wtFuns)
+// wt.use(wtFuns)
 
 $.use(domFuns)
 
-import * as utils from './utils'
-
-export { $, wt, utils }
+// import * as utils from './utils'
+// ,wt, utils
+export { $ }

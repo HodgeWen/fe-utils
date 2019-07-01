@@ -3,7 +3,7 @@ import { eachObj } from '../common'
 class Selector extends Array {
   selector: string;
 
-  length: number;
+  length: number = 0;
 
   constructor(sth: string | Object) {
     super()
@@ -23,6 +23,8 @@ class Selector extends Array {
       callback(this[i], i)
     }
   }
+
+  push = Array.prototype.push
 }
 
 // function Selector(str: string) {
@@ -40,16 +42,16 @@ const pt = Selector.prototype
 
 const ap = Array.prototype
 
-pt.constructor = Selector
+// pt.constructor = Selector
 pt.push = ap.push
 pt.splice = ap.splice
-pt.each = function (callback: (value: any, index: number) => void):void {
-  let i = -1
-  const len = this.length
-  while (++i < len) {
-    callback(this[i], i)
-  }
-}
+// pt.each = function (callback: (value: any, index: number) => void):void {
+//   let i = -1
+//   const len = this.length
+//   while (++i < len) {
+//     callback(this[i], i)
+//   }
+// }
 
 pt.env = (function () {
   const ua = navigator.userAgent.toLowerCase()
