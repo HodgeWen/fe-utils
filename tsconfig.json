@@ -1,0 +1,14 @@
+{
+  "compilerOptions": {
+    "sourceMap": false,
+    "noImplicitAny": true,
+    "baseUrl": ".", 
+    "declaration": true,
+  },
+  "include": [
+    "tsrc/**/*"
+  ],
+  // "exclude": [
+  //   "node_modules"
+  // ]
+}
