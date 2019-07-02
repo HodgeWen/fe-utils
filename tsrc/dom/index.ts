@@ -1,12 +1,11 @@
 import { eachObj } from '../common'
 
-class Selector extends Array {
+class Selector {
   selector: string;
 
   length: number = 0;
 
   constructor(sth: string | Object) {
-    super()
     this.length = 0
     if (typeof sth === 'string') {
       this.selector = sth
