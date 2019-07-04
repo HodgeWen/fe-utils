@@ -4,7 +4,7 @@ interface Dwrap {
 }
 
 interface Selector {
-  [index: string | number]: HTMLDocument;
+  index: string | number;
   length: number;
   selector?: string;
 }
