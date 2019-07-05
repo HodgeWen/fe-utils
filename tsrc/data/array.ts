@@ -1,11 +1,15 @@
 import { each, getCtx, getType } from '../common'
 
+interface Query {
+  [prop: string]: any
+}
+
 export function add(...args: any[]) {
   let ctx = getCtx(this)
   let len = args.length
   if (len < 1) return ctx 
 
-  let ret: any[] = [], i: number = -1
+  let ret: any[] = [], i = -1
   
   while (++i < len) {
     getType(args[i]) !== "Array" ? ret.push(args[i]) : ret = ret.concat(args[i])
@@ -13,10 +17,11 @@ export function add(...args: any[]) {
   return ctx.concat(ret)
 }
 
-export function findIndex(query) {
+export function findIndex(query: Query): number {
   const ctx = getCtx(this)
   const len = ctx.length
-  if (query === undefined) return len > 0
+  if (query === undefined) return -1
+
   const type = getType(query)
   if (type !== 'Object' && type !== 'Array') {
     let i = -1
@@ -39,12 +44,12 @@ export function findIndex(query) {
   return -1
 }
 
-export function has(query) {
+export function has(query: Query) {
   const ctx = getCtx(this)
   return findIndex.call(ctx, query) !== -1
 }
 
-export function set(id) {
+export function set(id: string) {
   const ctx = getCtx(this)
 
   if (Array.from && id === undefined) {
@@ -52,7 +57,7 @@ export function set(id) {
   }
 
   const obj = Object.create(null)
-  const arr = []
+  const arr: any[] = []
   if (id === undefined) {
     each(ctx, (v) => {
       const key = typeof v + v
@@ -73,12 +78,12 @@ export function set(id) {
   return arr
 }
 
-export function binarySearch(...args) {
+export function binarySearch(...args: any[]) {
   const ctx = getCtx(this)
   let start = 0
   let end = ctx.length - 1
   function getMid () {
-    return parseInt((start + end) / 2)
+    return Math.floor((start + end) / 2)
   }
   let midIndex = getMid()
 

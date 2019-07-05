@@ -4,6 +4,7 @@
     "noImplicitAny": true,
     "baseUrl": ".", 
     "declaration": true,
+    "experimentalDecorators": true
   },
   "include": [
     "tsrc/**/*"
