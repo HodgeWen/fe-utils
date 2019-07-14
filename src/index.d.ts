@@ -1,0 +1,30 @@
+type Obj = Record<string, any>;
+type Arr = any[];
+type ExcludeObj = string | number | boolean | null | undefined;
+declare class DWrap {
+  readonly data: any;
+  type: string;
+  constructor(data: any);
+  each(callback: (value: any, index: number, ctx: Arr) => any): boolean;
+  each(callback: (value: any, key: string, ctx: Obj) => any): boolean;
+  each(callback: (value: any, index: string, ctx: string) => any): boolean;
+  each(callback: (value: number, ticks: number, ctx: number) => any): boolean;
+  add<T>(...args: T[]): any;
+  findIndex(query: ExcludeObj): number;
+  findIndex(query: Obj): number;
+  has(query: ExcludeObj): boolean;
+  has(query: Obj): boolean;
+  set<T>(id?: string): T[];
+  binarySearch(value: number | string, key?: string): number;
+  map<S extends string>(fn: (value: S, key: number, ctx: S) => S): S;
+  map(fn: (value: any, index: number, ctx: Arr) => any): Arr;
+  map(fn: (value: any, key: string, ctx: Obj) => any): Obj;
+  serialize(separator?: string): string;
+  resetData(arr?: string[], type?: string): void;
+  keys(): Arr;
+  values(): Arr;
+  isEmpty(): boolean;
+  json(separator?: string): Obj;
+  repeat(num: number, joiner?: string): string;
+}
+export declare function wt(any: any): DWrap;
