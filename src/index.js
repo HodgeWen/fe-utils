@@ -1,15 +1,11 @@
-import $$, * as domFuns from './dom'
+import $, * as domFuns from './dom'
 
-import wtt, * as wtFuns from './data'
+import wt, * as wtFuns from './data'
 
-import * as uutils from './utils'
+import * as utils from './utils'
 
-wtt.use(wtFuns)
+wt.use(wtFuns)
 
-$$.use(domFuns)
+$.use(domFuns)
 
-export const $ = $$
-
-export const wt = wtt
-
-export const utils = uutils
+export { $, wt, utils }
