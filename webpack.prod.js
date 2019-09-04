@@ -9,7 +9,7 @@ module.exports = {
   mode: 'production',
   output: {
     filename: 'utils.prod.js',
-    library: 'utils',
+    // library: 'utils',
     libraryTarget: 'umd'
   },
   module: {

@@ -1,6 +1,6 @@
-// import { wt, $, utils } from "../dist/utils.prod"
+import { wt, $, utils } from "../dist/utils.prod"
 import m from '../dist/utils.prod'
-console.log(m)
+console.log(wt)
 // ~(function(ctx) {
 //   ctx.$ = $
 //   ctx.wt = wt
