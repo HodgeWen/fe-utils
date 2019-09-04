@@ -1,5 +1,5 @@
 import { wt, $, utils } from "../dist/utils.prod"
-import m from '../dist/utils.prod'
+
 console.log(wt)
 // ~(function(ctx) {
 //   ctx.$ = $

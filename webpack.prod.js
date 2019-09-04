@@ -1,6 +1,4 @@
 const path = require('path')
-const Hwp = require('html-webpack-plugin')
-const webpack = require('webpack')
 const WebpackProgressBar = require('webpack-progress-bar')
 const FriendlyErrorsWebpackPlugin = require('friendly-errors-webpack-plugin')
 

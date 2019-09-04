@@ -1,7 +1,8 @@
 {
   "name": "wt-utils",
-  "version": "1.4.0",
-  "main": "src/index.js",
+  "version": "1.4.1",
+  "module": "dist/utils.prod.js",
+  "main": "dist/utils.prod.js",
   "repository": "git@github.com:wenhongjie/fe-utils.git",
   "author": "wen <emailwen@qq.com>",
   "license": "MIT",
