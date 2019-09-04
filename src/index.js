@@ -2,10 +2,10 @@ import $, * as domFuns from './dom'
 
 import wt, * as wtFuns from './data'
 
+import * as utils from './utils'
+
 wt.use(wtFuns)
 
 $.use(domFuns)
-
-import * as utils from './utils'
 
 export { $, wt, utils }
