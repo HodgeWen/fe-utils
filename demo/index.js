@@ -1,4 +1,4 @@
-import { wt, $, utils } from "../tsrc"
+import { wt, $, utils } from "../dist/utils.prod"
 
 ~(function(ctx) {
   ctx.$ = $

@@ -15,7 +15,7 @@ export default class WStore {
       eachObj(this.storage, (val, key) => {
         try {
           ret[key] = JSON.parse(val)
-        } catch {
+        } catch (err) {
           ret[key] = val
         }
       })
@@ -24,7 +24,7 @@ export default class WStore {
     const value = this.storage.getItem(key)
     try {
       return JSON.parse(value)
-    } catch {
+    } catch (err) {
       return value
     }
   }

@@ -2,7 +2,7 @@ import Store from './storage'
 import Cookie from './storage'
 
 export default new class Cache {
- 
+
   constructor () {
     this.tactics = {
       sessionStorage: () => new Store('session'),
@@ -15,7 +15,7 @@ export default new class Cache {
     if (!this[type]) {
       const fn = this.tactics[type]
       this[type] = fn ? fn() : null
-    }  
+    }
     return this[type]
-  }  
+  }
 }
